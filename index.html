@@ -7,136 +7,432 @@
 
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#090909;color:#eee;font:15px Arial,sans-serif}
-.app{min-height:100vh;display:flex}
+
+body{
+ margin:0;
+ background:#090909;
+ color:#eee;
+ font:15px Arial,sans-serif
+}
+
+button,input{
+ font:inherit
+}
+
+.app{
+ min-height:100vh;
+ display:flex
+}
+
 .side{
-width:245px;position:fixed;inset:0 auto 0 0;background:#101010;
-border-right:1px solid #292929;padding:24px 15px
+ width:245px;
+ position:fixed;
+ inset:0 auto 0 0;
+ background:#101010;
+ border-right:1px solid #292929;
+ padding:24px 15px
 }
+
 .logo{
-font-size:22px;font-weight:800;letter-spacing:2px;color:#d5b45a;
-margin:0 12px 28px
+ font-size:22px;
+ font-weight:800;
+ letter-spacing:2px;
+ color:#d5b45a;
+ margin:0 12px 28px
 }
+
 nav button{
-width:100%;border:0;background:transparent;color:#aaa;text-align:left;
-padding:12px;border-radius:10px;margin:2px 0;cursor:pointer
+ width:100%;
+ border:0;
+ background:transparent;
+ color:#aaa;
+ text-align:left;
+ padding:12px;
+ border-radius:10px;
+ margin:2px 0;
+ cursor:pointer
 }
-nav button:hover,nav button.active{
-background:#1d1a13;color:#e2c56b
+
+nav button:hover,
+nav button.active{
+ background:#1d1a13;
+ color:#e2c56b
 }
+
 .main{
-margin-left:245px;width:calc(100% - 245px);padding:28px
+ margin-left:245px;
+ width:calc(100% - 245px);
+ padding:28px
 }
+
 .top{
-display:flex;justify-content:space-between;align-items:center;
-margin-bottom:25px;gap:10px
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin-bottom:25px;
+ gap:10px
 }
-h1{margin:0;font-size:29px}
-.sub{color:#777;margin-top:7px}
+
+h1{
+ margin:0;
+ font-size:29px
+}
+
+h2{
+ margin-top:0
+}
+
+.sub{
+ color:#777;
+ margin-top:7px
+}
+
 .creator{
-border:1px solid #695522;background:#17130a;color:#e1c36a;
-padding:9px 14px;border-radius:20px;font-weight:bold
+ border:1px solid #695522;
+ background:#17130a;
+ color:#e1c36a;
+ padding:9px 14px;
+ border-radius:20px;
+ font-weight:bold
 }
+
 .cards{
-display:grid;grid-template-columns:repeat(4,1fr);gap:15px
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:15px
 }
-.card,.panel{
-background:#111;border:1px solid #292929;border-radius:15px;padding:20px
+
+.card,
+.panel{
+ background:#111;
+ border:1px solid #292929;
+ border-radius:15px;
+ padding:20px
 }
-.value{font-size:28px;font-weight:800;margin-top:8px}
-.label{color:#777;font-size:13px}
+
+.value{
+ font-size:28px;
+ font-weight:800;
+ margin-top:8px
+}
+
+.label{
+ color:#777;
+ font-size:13px
+}
+
 .grid{
-display:grid;grid-template-columns:2fr 1fr;gap:17px;margin-top:17px
+ display:grid;
+ grid-template-columns:2fr 1fr;
+ gap:17px;
+ margin-top:17px
 }
+
 .item{
-display:flex;gap:12px;align-items:center;padding:13px 0;
-border-bottom:1px solid #222
+ display:flex;
+ gap:12px;
+ align-items:center;
+ padding:13px 10px;
+ border-bottom:1px solid #222
 }
-.item:last-child{border:0}
+
+.item:last-child{
+ border:0
+}
+
 .icon{
-width:38px;height:38px;display:grid;place-items:center;
-background:#191919;border-radius:10px;font-size:20px
+ width:38px;
+ height:38px;
+ display:grid;
+ place-items:center;
+ background:#191919;
+ border-radius:10px;
+ font-size:20px;
+ flex-shrink:0
 }
-.badges{display:flex;flex-wrap:wrap;gap:9px}
+
+.badges{
+ display:flex;
+ flex-wrap:wrap;
+ gap:9px
+}
+
 .badge{
-padding:9px 11px;border:1px solid #333;border-radius:11px;
-background:#181818
+ padding:9px 11px;
+ border:1px solid #333;
+ border-radius:11px;
+ background:#181818
 }
-.gold{border-color:#80662a;color:#e2c56b}
-.page{display:none}
-.page.active{display:block}
+
+.gold{
+ border-color:#80662a;
+ color:#e2c56b
+}
+
+.page{
+ display:none
+}
+
+.page.active{
+ display:block
+}
+
 .btn{
-background:#c6a44e;border:0;border-radius:9px;
-padding:10px 15px;font-weight:bold;cursor:pointer
+ background:#c6a44e;
+ color:#080808;
+ border:0;
+ border-radius:9px;
+ padding:10px 15px;
+ font-weight:bold;
+ cursor:pointer
+}
+
+.btn:hover{
+ opacity:.9
+}
+
+.btn.secondary{
+ background:#191919;
+ color:#e2c56b;
+ border:1px solid #695522
 }
 
 .auth-overlay{
-position:fixed;inset:0;background:rgba(0,0,0,.92);
-z-index:9999;display:flex;align-items:center;
-justify-content:center;padding:16px
+ position:fixed;
+ inset:0;
+ background:rgba(0,0,0,.92);
+ z-index:9999;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ padding:16px
 }
+
 .auth-box{
-width:min(430px,100%);background:#111;
-border:1px solid #80662a;border-radius:18px;
-padding:24px;box-shadow:0 20px 70px #000
+ width:min(430px,100%);
+ background:#111;
+ border:1px solid #80662a;
+ border-radius:18px;
+ padding:24px;
+ box-shadow:0 20px 70px #000
 }
-.auth-box h2{color:#e2c56b;margin:0 0 6px}
-.auth-box input,.chat-input{
-width:100%;padding:12px;margin:7px 0;
-background:#181818;border:1px solid #333;
-border-radius:9px;color:#fff
+
+.auth-box h2{
+ color:#e2c56b;
+ margin:0 0 6px
 }
-.auth-row{display:flex;gap:8px}
-.auth-row .btn{flex:1}
+
+.auth-box input,
+.chat-input{
+ width:100%;
+ padding:12px;
+ margin:7px 0;
+ background:#181818;
+ border:1px solid #333;
+ border-radius:9px;
+ color:#fff;
+ outline:none
+}
+
+.auth-box input:focus,
+.chat-input:focus{
+ border-color:#80662a
+}
+
+.auth-row{
+ display:flex;
+ gap:8px
+}
+
+.auth-row .btn{
+ flex:1
+}
+
 .auth-msg{
-min-height:22px;color:#e2c56b;
-margin-top:10px;font-size:13px
+ min-height:22px;
+ color:#e2c56b;
+ margin-top:10px;
+ font-size:13px
 }
-.userbar{display:flex;gap:8px;align-items:center}
+
 .logout{
-background:#191919!important;
-color:#e2c56b!important;
-border:1px solid #695522!important
+ background:#191919!important;
+ color:#e2c56b!important;
+ border:1px solid #695522!important
 }
+
+.channel-list{
+ display:flex;
+ flex-direction:column
+}
+
+.channel-item{
+ display:flex;
+ gap:12px;
+ align-items:center;
+ padding:14px 10px;
+ border-bottom:1px solid #222;
+ cursor:pointer;
+ border-radius:10px;
+ transition:.15s
+}
+
+.channel-item:hover{
+ background:#1d1a13
+}
+
+.channel-item.active{
+ background:#1d1a13;
+ outline:1px solid #695522
+}
+
+.channel-item:last-child{
+ border-bottom:0
+}
+
+.channel-name{
+ color:#eee;
+ font-weight:bold
+}
+
 .chat-wrap{
-display:grid;grid-template-columns:220px 1fr;gap:14px
+ display:grid;
+ grid-template-columns:240px 1fr;
+ gap:14px
 }
-.channel-list .item{cursor:pointer}
-.channel-list .item.active{
-background:#1d1a13;border-radius:10px;padding-left:10px
-}
+
 .chat-box{
-min-height:360px;display:flex;flex-direction:column
+ min-height:500px;
+ display:flex;
+ flex-direction:column
 }
+
+.chat-header{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:10px;
+ padding-bottom:15px;
+ border-bottom:1px solid #222
+}
+
 .messages{
-flex:1;max-height:430px;overflow:auto;margin-bottom:10px
+ flex:1;
+ min-height:300px;
+ max-height:430px;
+ overflow:auto;
+ margin:15px 0
 }
+
 .msg{
-padding:9px 0;border-bottom:1px solid #222
+ padding:10px 0;
+ border-bottom:1px solid #222;
+ line-height:1.5
 }
-.msg b{color:#e2c56b}
-.send-row{display:flex;gap:8px}
-.send-row .chat-input{margin:0}
-.creator-only{display:none}
-.creator-user .creator-only{display:block}
+
+.msg b{
+ color:#e2c56b
+}
+
+.msg-time{
+ color:#666;
+ font-size:11px;
+ margin-left:8px
+}
+
+.send-row{
+ display:flex;
+ gap:8px
+}
+
+.send-row .chat-input{
+ margin:0;
+ flex:1
+}
+
+.creator-only{
+ display:none
+}
+
+.creator-user .creator-only{
+ display:block
+}
+
+.loading{
+ padding:20px;
+ text-align:center;
+ color:#777
+}
+
+.error-box{
+ padding:15px;
+ border:1px solid #5d3030;
+ background:#1b1010;
+ border-radius:10px;
+ color:#e88
+}
+
+.empty{
+ padding:30px 10px;
+ text-align:center;
+ color:#777
+}
 
 @media(max-width:800px){
-.side{width:72px;padding:20px 7px}
-.logo{font-size:0;text-align:center}
-.logo:after{content:"EBK";font-size:18px}
-nav button{font-size:0;text-align:center}
-nav button:first-letter{font-size:20px}
-.main{
-margin-left:72px;
-width:calc(100% - 72px);
-padding:18px
+
+.side{
+ width:72px;
+ padding:20px 7px
 }
-.cards{grid-template-columns:repeat(2,1fr)}
-.grid{grid-template-columns:1fr}
-.chat-wrap{grid-template-columns:1fr}
+
+.logo{
+ font-size:0;
+ text-align:center
+}
+
+.logo:after{
+ content:"EBK";
+ font-size:18px
+}
+
+nav button{
+ font-size:0;
+ text-align:center
+}
+
+nav button:first-letter{
+ font-size:20px
+}
+
+.main{
+ margin-left:72px;
+ width:calc(100% - 72px);
+ padding:18px
+}
+
+.cards{
+ grid-template-columns:repeat(2,1fr)
+}
+
+.grid{
+ grid-template-columns:1fr
+}
+
+.chat-wrap{
+ grid-template-columns:1fr
+}
+
 .channel-list{
-max-height:220px;
-overflow:auto
+ max-height:220px;
+ overflow:auto
+}
+
+.top{
+ flex-wrap:wrap
+}
+
+.chat-header{
+ flex-wrap:wrap
 }
 }
 </style>
@@ -197,37 +493,35 @@ Tavo finansų ir bendruomenės centras
 </div>
 </div>
 
-<div class="creator">
+<div class="creator" id="creatorBadge">
 ⚜️ EBK · CREATOR
 </div>
 
 </div>
 
-
 <div class="cards">
 
 <div class="card">
 <div class="label">LVL</div>
-<div class="value">1</div>
+<div class="value" id="homeLevel">1</div>
 </div>
 
 <div class="card">
 <div class="label">POINTS</div>
-<div class="value">0</div>
+<div class="value" id="homePoints">0</div>
 </div>
 
 <div class="card">
 <div class="label">PLUS</div>
-<div class="value">0</div>
+<div class="value" id="homePluses">0</div>
 </div>
 
 <div class="card">
 <div class="label">DIAMONDS</div>
-<div class="value">0 💎</div>
+<div class="value" id="homeDiamonds">0 💎</div>
 </div>
 
 </div>
-
 
 <div class="grid">
 
@@ -235,7 +529,7 @@ Tavo finansų ir bendruomenės centras
 
 <h2>Greita prieiga</h2>
 
-<div class="item">
+<div class="item" onclick="showById('chat')">
 <div class="icon">💬</div>
 <div>
 <b>Bendravimas</b><br>
@@ -245,7 +539,7 @@ Kanalai, temos ir žinutės
 </div>
 </div>
 
-<div class="item">
+<div class="item" onclick="showById('badges')">
 <div class="icon">🏅</div>
 <div>
 <b>Pasiekimai</b><br>
@@ -255,7 +549,7 @@ Kanalai, temos ir žinutės
 </div>
 </div>
 
-<div class="item">
+<div class="item" onclick="showById('games')">
 <div class="icon">🎮</div>
 <div>
 <b>Žaidimai</b><br>
@@ -266,7 +560,6 @@ Bendruomenės žaidimų zona
 </div>
 
 </div>
-
 
 <div class="panel">
 
@@ -300,31 +593,30 @@ Vartotojo informacija ir pasiekimai
 
 </div>
 
-
 <div class="panel">
 
-<h2>EBK</h2>
+<h2 id="profileName">EBK</h2>
 
 <div class="cards">
 
 <div class="card">
 <div class="label">LVL</div>
-<div class="value">1</div>
+<div class="value" id="profileLevel">1</div>
 </div>
 
 <div class="card">
 <div class="label">POINTS</div>
-<div class="value">0</div>
+<div class="value" id="profilePoints">0</div>
 </div>
 
 <div class="card">
 <div class="label">PLUS</div>
-<div class="value">0</div>
+<div class="value" id="profilePluses">0</div>
 </div>
 
 <div class="card">
 <div class="label">DIAMONDS</div>
-<div class="value">0 💎</div>
+<div class="value" id="profileDiamonds">0 💎</div>
 </div>
 
 </div>
@@ -345,47 +637,30 @@ Kanalai · Temos · Žinutės
 </div>
 </div>
 
-<button class="btn">
+<button class="btn creator-only" onclick="newChannel()">
 + Naujas kanalas
 </button>
 
 </div>
 
+<div id="chatContent" class="chat-wrap">
 
 <div class="panel">
 
-<div class="label">
-Kanalai bus įkelti iš Supabase...
+<h3>Kanalai</h3>
+
+<div id="channelList" class="channel-list">
+<div class="loading">Kraunami kanalai...</div>
 </div>
 
-<div class="item">
-<div class="icon">📢</div>
-<div>
-<b>General</b><br>
-<span class="label">
-Pagrindinis bendruomenės kanalas
-</span>
-</div>
 </div>
 
-<div class="item">
-<div class="icon">💰</div>
-<div>
-<b>Finansai</b><br>
-<span class="label">
-Finansų diskusijos
-</span>
-</div>
+<div class="panel">
+
+<div id="channelView" class="empty">
+Pasirink kanalą.
 </div>
 
-<div class="item">
-<div class="icon">🎮</div>
-<div>
-<b>Žaidimai</b><br>
-<span class="label">
-Žaidimų temos
-</span>
-</div>
 </div>
 
 </div>
@@ -405,7 +680,6 @@ Bendruomenės žaidimų zona
 </div>
 
 </div>
-
 
 <div class="cards">
 
@@ -470,8 +744,7 @@ Pasiekimų sistema
 
 </div>
 
-
-<div class="panel">
+<div class="panel" id="badgesPanel">
 
 <div class="badges">
 
@@ -511,6 +784,7 @@ Privatus sistemos valdymo centras
 
 </div>
 
+<div id="creatorContent">
 
 <div class="cards">
 
@@ -548,43 +822,22 @@ Creator-only ir audit log
 
 </div>
 
+</div>
+
 </section>
 
 </main>
 </div>
 
 
-<script>
-
-function show(id,b){
-
-document
-.querySelectorAll('.page')
-.forEach(x=>x.classList.remove('active'));
-
-const p=document.getElementById(id);
-
-if(p)p.classList.add('active');
-
-document
-.querySelectorAll('nav button')
-.forEach(x=>x.classList.remove('active'));
-
-if(b)b.classList.add('active');
-
-if(id==='chat')loadChannels();
-if(id==='badges')loadBadges();
-if(id==='creator')loadCreator();
-
-}
-
-</script>
-
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-
 <script>
+
+/* =========================================================
+   EBK FINANCES
+   SUPABASE
+========================================================= */
 
 const SUPABASE_URL =
 "https://elbaqghpzpdelmmllreo.supabase.co";
@@ -599,21 +852,99 @@ SUPABASE_PUBLISHABLE_KEY
 );
 
 
-let currentUser=null;
-let currentProfile=null;
-let currentChannel=null;
+/* =========================================================
+   STATE
+========================================================= */
 
+let currentUser = null;
+let currentProfile = null;
+let currentChannel = null;
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function show(id, button){
+
+document
+.querySelectorAll(".page")
+.forEach(page=>{
+page.classList.remove("active");
+});
+
+const page =
+document.getElementById(id);
+
+if(page){
+page.classList.add("active");
+}
+
+document
+.querySelectorAll("nav button")
+.forEach(btn=>{
+btn.classList.remove("active");
+});
+
+if(button){
+button.classList.add("active");
+}
+
+if(id === "chat"){
+loadChannels();
+}
+
+if(id === "badges"){
+loadBadges();
+}
+
+if(id === "creator"){
+loadCreator();
+}
+
+}
+
+
+function showById(id){
+
+const buttons =
+document.querySelectorAll("nav button");
+
+let button = null;
+
+buttons.forEach(btn=>{
+
+if(
+btn.getAttribute("onclick") &&
+btn.getAttribute("onclick").includes("'"+id+"'")
+){
+button = btn;
+}
+
+});
+
+show(id,button);
+
+}
+
+
+/* =========================================================
+   AUTH UI
+========================================================= */
 
 function authUI(){
 
-if(document.getElementById('authOverlay'))return;
+if(document.getElementById("authOverlay")){
+return;
+}
 
-const d=document.createElement('div');
+const overlay =
+document.createElement("div");
 
-d.id='authOverlay';
-d.className='auth-overlay';
+overlay.id = "authOverlay";
+overlay.className = "auth-overlay";
 
-d.innerHTML=`
+overlay.innerHTML = `
 
 <div class="auth-box">
 
@@ -638,8 +969,7 @@ autocomplete="current-password">
 <input
 id="authUsername"
 type="text"
-placeholder="Vartotojo vardas"
-style="display:none">
+placeholder="Vartotojo vardas">
 
 <div class="auth-row">
 
@@ -650,7 +980,7 @@ Prisijungti
 </button>
 
 <button
-class="btn"
+class="btn secondary"
 onclick="registerUser()">
 Registruotis
 </button>
@@ -665,42 +995,55 @@ id="authMsg">
 </div>
 `;
 
-document.body.appendChild(d);
+document.body.appendChild(overlay);
 
 }
 
+
+/* =========================================================
+   LOGIN
+========================================================= */
 
 async function login(){
 
-const msg=document.getElementById('authMsg');
+const msg =
+document.getElementById("authMsg");
 
-msg.textContent='Jungiamasi...';
+const email =
+document.getElementById("authEmail")
+.value.trim();
 
-const {error}=
+const password =
+document.getElementById("authPassword")
+.value;
+
+if(!email || !password){
+
+msg.textContent =
+"Įrašyk el. paštą ir slaptažodį.";
+
+return;
+}
+
+msg.textContent =
+"Jungiamasi...";
+
+const {error} =
 await supabaseClient.auth.signInWithPassword({
-
-email:
-document.getElementById('authEmail')
-.value.trim(),
-
-password:
-document.getElementById('authPassword')
-.value
-
+email,
+password
 });
-
 
 if(error){
 
-msg.textContent=
-'Klaida: '+error.message;
+msg.textContent =
+"Klaida: " + error.message;
 
 return;
-
 }
 
 document
-.getElementById('authOverlay')
+.getElementById("authOverlay")
 ?.remove();
 
 await boot();
@@ -708,104 +1051,94 @@ await boot();
 }
 
 
+/* =========================================================
+   REGISTER
+========================================================= */
+
 async function registerUser(){
 
-const email=
-document.getElementById('authEmail')
+const email =
+document.getElementById("authEmail")
 .value.trim();
 
-const password=
-document.getElementById('authPassword')
+const password =
+document.getElementById("authPassword")
 .value;
 
-const username=
-document.getElementById('authUsername');
+const username =
+document.getElementById("authUsername")
+.value.trim();
 
-username.style.display='block';
+const msg =
+document.getElementById("authMsg");
 
-const msg=
-document.getElementById('authMsg');
+if(!email){
 
-
-if(!username.value.trim()){
-
-msg.textContent=
-'Įrašyk vartotojo vardą.';
+msg.textContent =
+"Įrašyk el. paštą.";
 
 return;
-
 }
 
+if(password.length < 6){
 
-if(password.length<6){
-
-msg.textContent=
-'Slaptažodis turi būti bent 6 simbolių.';
+msg.textContent =
+"Slaptažodis turi būti bent 6 simbolių.";
 
 return;
-
 }
 
+if(!username){
 
-msg.textContent=
-'Kuriama paskyra...';
+msg.textContent =
+"Įrašyk vartotojo vardą.";
 
+return;
+}
 
-const {data,error}=
+msg.textContent =
+"Kuriama paskyra...";
+
+const {data,error} =
 await supabaseClient.auth.signUp({
 
 email,
-password
+password,
+
+options:{
+data:{
+username:username
+}
+}
 
 });
-
 
 if(error){
 
-msg.textContent=
-'Klaida: '+error.message;
+msg.textContent =
+"Klaida: " + error.message;
 
 return;
-
 }
-
 
 if(data.user){
 
-const {error:e}=
-await supabaseClient
-.from('profiles')
-.upsert({
+msg.textContent =
+"Paskyra sukurta. Jei reikia, patvirtink el. paštą.";
 
-id:data.user.id,
-username:username.value.trim(),
-full_name:username.value.trim(),
-role:'user',
-level:1,
-points:0,
-pluses:0
+}else{
 
-});
-
-
-if(e){
-
-msg.textContent=
-'Paskyra sukurta, bet profilis neįrašytas: '
-+e.message;
-
-return;
+msg.textContent =
+"Patikrink savo el. paštą.";
 
 }
 
 }
 
 
-msg.textContent=
-'Paskyra sukurta. Jei įjungtas el. pašto patvirtinimas, patvirtink el. paštą.';
-
-}
-
+/* =========================================================
+   LOGOUT
+========================================================= */
 
 async function logout(){
 
@@ -816,260 +1149,544 @@ location.reload();
 }
 
 
+/* =========================================================
+   BOOT
+========================================================= */
+
 async function boot(){
 
 const {
-data:{session}
-}=
+data:{session},
+error
+} =
 await supabaseClient.auth.getSession();
 
+if(error){
+
+console.error(error);
+
+authUI();
+
+return;
+}
 
 if(!session){
 
 authUI();
 
 return;
-
 }
 
+currentUser =
+session.user;
 
-currentUser=session.user;
 
+/* PROFILE */
 
 const {
 data:profile,
-error
-}=
+error:profileError
+} =
 await supabaseClient
-.from('profiles')
+.from("profiles")
 .select(
-'id,username,full_name,avatar_url,role,level,points,pluses'
+"id,username,full_name,avatar_url,role,level,points,pluses,diamonds"
 )
-.eq('id',currentUser.id)
-.single();
+.eq("id",currentUser.id)
+.maybeSingle();
 
 
-if(error){
+if(profileError){
 
-console.error(error);
+console.error(
+"Profile error:",
+profileError
+);
 
 return;
-
 }
 
 
-currentProfile=profile;
+/*
+ Jeigu triggeris dar nespėjo sukurti profilio,
+ vartotojas vis tiek gali būti prisijungęs.
+*/
 
+currentProfile =
+profile || {
+id:currentUser.id,
+username:
+currentUser.email?.split("@")[0] ||
+"Vartotojas",
+role:"user",
+level:1,
+points:0,
+pluses:0,
+diamonds:0
+};
+
+
+/* CREATOR CLASS */
 
 document.body.classList.toggle(
-'creator-user',
-profile?.role==='creator'
+"creator-user",
+currentProfile.role === "creator"
 );
 
 
-const v=
-document.querySelectorAll(
-'#home .value'
+/* HOME */
+
+setText(
+"homeLevel",
+currentProfile.level ?? 1
+);
+
+setText(
+"homePoints",
+currentProfile.points ?? 0
+);
+
+setText(
+"homePluses",
+currentProfile.pluses ?? 0
+);
+
+setText(
+"homeDiamonds",
+(currentProfile.diamonds ?? 0) + " 💎"
 );
 
 
-if(v[0])
-v[0].textContent=
-profile?.level??1;
+/* PROFILE */
 
-if(v[1])
-v[1].textContent=
-profile?.points??0;
+setText(
+"profileName",
+currentProfile.username ||
+currentProfile.full_name ||
+"Vartotojas"
+);
 
-if(v[2])
-v[2].textContent=
-profile?.pluses??0;
+setText(
+"profileLevel",
+currentProfile.level ?? 1
+);
+
+setText(
+"profilePoints",
+currentProfile.points ?? 0
+);
+
+setText(
+"profilePluses",
+currentProfile.pluses ?? 0
+);
+
+setText(
+"profileDiamonds",
+(currentProfile.diamonds ?? 0) + " 💎"
+);
 
 
-const c=
-document.querySelector('.creator');
+/* CREATOR BADGE */
 
+const creatorBadge =
+document.getElementById("creatorBadge");
 
-if(c){
+if(creatorBadge){
 
-c.textContent=
-profile?.role==='creator'
-?'⚜️ EBK · CREATOR'
-:'👤 '+(
-profile?.username||
-profile?.full_name||
-'Vartotojas'
+if(currentProfile.role === "creator"){
+
+creatorBadge.textContent =
+"⚜️ EBK · CREATOR";
+
+}else{
+
+creatorBadge.textContent =
+"👤 " +
+(
+currentProfile.username ||
+currentProfile.full_name ||
+"Vartotojas"
 );
 
 }
 
+}
+
+
+/* LOGOUT */
 
 addLogout();
 
 }
 
 
-function addLogout(){
+/* =========================================================
+   TEXT HELPER
+========================================================= */
 
-if(document.getElementById('logoutBtn'))
-return;
+function setText(id,value){
 
+const el =
+document.getElementById(id);
 
-const top=
-document.querySelector('.top');
-
-if(!top)return;
-
-
-const b=
-document.createElement('button');
-
-b.id='logoutBtn';
-b.className='btn logout';
-b.textContent='Atsijungti';
-b.onclick=logout;
-
-top.appendChild(b);
+if(el){
+el.textContent = value;
+}
 
 }
 
 
+/* =========================================================
+   LOGOUT BUTTON
+========================================================= */
+
+function addLogout(){
+
+if(document.getElementById("logoutBtn")){
+return;
+}
+
+const top =
+document.querySelector("#home .top");
+
+if(!top){
+return;
+}
+
+const button =
+document.createElement("button");
+
+button.id =
+"logoutBtn";
+
+button.className =
+"btn logout";
+
+button.textContent =
+"Atsijungti";
+
+button.onclick =
+logout;
+
+top.appendChild(button);
+
+}
+
+
+/* =========================================================
+   CHANNELS
+========================================================= */
+
 async function loadChannels(){
 
-const box=
-document.querySelector('#chat .panel');
+const list =
+document.getElementById("channelList");
 
-if(!box)return;
+const view =
+document.getElementById("channelView");
 
+if(!list){
+return;
+}
 
-box.innerHTML=
-'<div class="label">Kraunama...</div>';
-
+list.innerHTML =
+'<div class="loading">Kraunami kanalai...</div>';
 
 const {
 data,
 error
-}=
+} =
 await supabaseClient
-.from('channels')
-.select('*')
+.from("channels")
+.select(
+"id,name,description,is_private,created_by"
+)
 .order(
-'created_at',
+"created_at",
 {ascending:true}
 );
 
 
 if(error){
 
-box.innerHTML=
-'<div class="label">'+
-'Kanalų nepavyko įkelti: '+
-escapeHtml(error.message)+
-'</div>';
+console.error(
+"Channels error:",
+error
+);
+
+list.innerHTML = `
+<div class="error-box">
+Kanalų nepavyko įkelti:<br>
+${escapeHtml(error.message)}
+</div>
+`;
 
 return;
+}
+
+
+if(!data || data.length === 0){
+
+list.innerHTML =
+'<div class="empty">Kanalų nėra.</div>';
+
+if(view){
+
+view.innerHTML =
+'<div class="empty">Kanalų nėra.</div>';
+
+}
+
+return;
+}
+
+
+/*
+ Saugumas frontend pusėje:
+ jei dėl kažkokios priežasties DB turėtų dublikatus,
+ rodome tik vieną kiekvieno pavadinimo kanalą.
+*/
+
+const unique = [];
+const names = new Set();
+
+for(const channel of data){
+
+const name =
+String(channel.name || "")
+.trim()
+.toLowerCase();
+
+if(names.has(name)){
+continue;
+}
+
+names.add(name);
+unique.push(channel);
 
 }
 
 
-if(!data?.length){
+list.innerHTML =
+unique.map(channel => `
 
-box.innerHTML=
-'<div class="label">Kanalų dar nėra.</div>';
+<div
+class="channel-item ${currentChannel === channel.id ? "active" : ""}"
+data-channel-id="${escapeAttr(channel.id)}">
 
-return;
-
-}
-
-
-box.innerHTML=
-data.map((ch)=>
-
-`<div
-class="item"
-onclick="openChannel('${escapeHtml(ch.id)}')">
-
-<div class="icon">📢</div>
+<div class="icon">
+${channelIcon(channel.name)}
+</div>
 
 <div>
 
-<b>
-${escapeHtml(ch.name||'Kanalas')}
-</b>
-
-<br>
+<div class="channel-name">
+${escapeHtml(channel.name || "Kanalas")}
+</div>
 
 <span class="label">
-${escapeHtml(ch.description||'')}
+${escapeHtml(channel.description || "")}
 </span>
 
 </div>
 
-</div>`
+</div>
 
-).join('');
+`).join("");
+
+
+/*
+ SVARBU:
+ nenaudojame inline onclick su UUID.
+ Prijungiame tikrus click event'us.
+*/
+
+list
+.querySelectorAll(".channel-item")
+.forEach(item=>{
+
+item.addEventListener(
+"click",
+function(){
+
+const id =
+this.dataset.channelId;
+
+if(id){
+openChannel(id);
+}
+
+});
+
+});
+
 
 }
 
 
+/* =========================================================
+   CHANNEL ICON
+========================================================= */
+
+function channelIcon(name){
+
+const n =
+String(name || "")
+.toLowerCase();
+
+if(n.includes("finans")){
+return "💰";
+}
+
+if(n.includes("žaid") || n.includes("zaid")){
+return "🎮";
+}
+
+return "📢";
+
+}
+
+
+/* =========================================================
+   OPEN CHANNEL
+========================================================= */
+
 async function openChannel(id){
 
-currentChannel=id;
+if(!id){
+return;
+}
+
+currentChannel = id;
+
+const view =
+document.getElementById("channelView");
+
+if(!view){
+return;
+}
+
+view.innerHTML =
+'<div class="loading">Kraunamas kanalas...</div>';
 
 
-const {data:channel}=
+/* CHANNEL */
+
+const {
+data:channel,
+error:channelError
+} =
 await supabaseClient
-.from('channels')
-.select('*')
-.eq('id',id)
-.single();
+.from("channels")
+.select(
+"id,name,description,is_private,created_by"
+)
+.eq("id",id)
+.maybeSingle();
 
+
+if(channelError){
+
+view.innerHTML = `
+<div class="error-box">
+Kanalo nepavyko atidaryti:<br>
+${escapeHtml(channelError.message)}
+</div>
+`;
+
+return;
+}
+
+
+if(!channel){
+
+view.innerHTML =
+'<div class="error-box">Kanalas nerastas.</div>';
+
+return;
+}
+
+
+/* MESSAGES */
 
 const {
 data:messages,
-error
-}=
+error:messageError
+} =
 await supabaseClient
-.from('messages')
-.select('*')
-.eq('channel_id',id)
+.from("messages")
+.select("*")
+.eq("channel_id",id)
 .order(
-'created_at',
+"created_at",
 {ascending:true}
 )
 .limit(100);
 
 
-const section=
-document.getElementById('chat');
+/* RENDER */
 
-
-section.querySelector('.panel').innerHTML=
-
-`
+view.innerHTML = `
 
 <div class="chat-box">
 
+<div class="chat-header">
+
+<div>
+
 <h2>
-📢 ${escapeHtml(channel?.name||'Kanalas')}
+${channelIcon(channel.name)}
+${escapeHtml(channel.name)}
 </h2>
+
+<div class="label">
+${escapeHtml(channel.description || "")}
+</div>
+
+</div>
+
+<button
+class="btn secondary"
+id="backChannels">
+← Kanalai
+</button>
+
+</div>
 
 <div
 class="messages"
 id="messages">
 
 ${
-error
+messageError
+
 ?
-'<div class="label">Žinučių nepavyko įkelti.</div>'
+
+`
+<div class="error-box">
+Žinučių nepavyko įkelti:<br>
+${escapeHtml(messageError.message)}
+</div>
+`
+
 :
-(messages||[])
+
+(messages || []).length
+
+?
+
+(messages || [])
 .map(renderMessage)
-.join('')
+.join("")
+
+:
+
+'<div class="empty">Šiame kanale žinučių dar nėra.</div>'
+
 }
 
 </div>
-
 
 <div class="send-row">
 
@@ -1077,240 +1694,56 @@ error
 class="chat-input"
 id="messageInput"
 placeholder="Rašyti žinutę..."
-onkeydown="if(event.key==='Enter')sendMessage()">
+autocomplete="off">
 
 <button
 class="btn"
-onclick="sendMessage()">
+id="sendMessageBtn">
 Siųsti
 </button>
 
 </div>
 
 </div>
-
 `;
 
-}
 
-
-function renderMessage(m){
-
-return `
-
-<div class="msg">
-
-<b>
-${escapeHtml(
-m.username||
-m.author_name||
-'Vartotojas'
-)}
-</b>
-
-<br>
-
-${escapeHtml(
-m.content||
-m.body||
-''
-)}
-
-</div>
-
-`;
-
-}
-
-
-async function sendMessage(){
-
-if(!currentChannel||!currentUser)
-return;
-
-
-const input=
-document.getElementById('messageInput');
-
-const content=
-input?.value.trim();
-
-
-if(!content)return;
-
-
-const payload={
-
-channel_id:currentChannel,
-user_id:currentUser.id,
-content
-
-};
-
-
-let r=
-await supabaseClient
-.from('messages')
-.insert(payload);
-
-
-if(r.error){
-
-const alt={
-
-channel_id:currentChannel,
-author_id:currentUser.id,
-content
-
-};
-
-
-r=
-await supabaseClient
-.from('messages')
-.insert(alt);
-
-}
-
-
-if(r.error){
-
-alert(
-'Žinutės nepavyko išsiųsti: '+
-r.error.message
-);
-
-return;
-
-}
-
-
-input.value='';
-
-await openChannel(currentChannel);
-
-}
-
-
-async function loadBadges(){
-
-const p=
-document.querySelector(
-'#badges .panel'
-);
-
-if(!p)return;
-
-
-const {
-data,
-error
-}=
-await supabaseClient
-.from('badges')
-.select('*')
-.order('id');
-
-
-if(error){
-
-p.innerHTML=
-'<div class="label">'+
-'Ženkliukų nepavyko įkelti: '+
-escapeHtml(error.message)+
-'</div>';
-
-return;
-
-}
-
-
-p.innerHTML=
-
-'<div class="badges">'+
-
-(data||[])
-.map(b=>
-
-`<span
-class="badge ${b.creator_only?'gold':''}">
-
-${escapeHtml(b.icon||'🏅')}
-
-${escapeHtml(b.name)}
-
-</span>`
-
-)
-.join('')
-
-+'</div>';
-
-}
-
-
-async function loadCreator(){
-
-if(currentProfile?.role!=='creator'){
+/* BACK */
 
 document
-.getElementById('creator')
-.querySelector('.cards')
-.innerHTML=
+.getElementById("backChannels")
+?.addEventListener(
+"click",
+function(){
 
-`<div class="panel">
+currentChannel = null;
 
-<b>🔒 Creator-only</b>
+const view =
+document.getElementById("channelView");
 
-<br>
+if(view){
 
-<span class="label">
-Ši zona prieinama tik Creator.
-</span>
-
-</div>`;
-
-return;
+view.innerHTML =
+'<div class="empty">Pasirink kanalą.</div>';
 
 }
 
+loadChannels();
+
 }
-
-
-function escapeHtml(v){
-
-return String(v??'')
-.replace(
-/[&<>"']/g,
-x=>
-({
-'&':'&amp;',
-'<':'&lt;',
-'>':'&gt;',
-'"':'&quot;',
-"'":'&#039;'
-}[x])
 );
 
-}
+
+/* SEND */
+
+document
+.getElementById("sendMessageBtn")
+?.addEventListener(
+"click",
+sendMessage
+);
 
 
-supabaseClient
-.auth
-.onAuthStateChange(
-(_event,session)=>{
-
-if(!session)
-document.getElementById('authOverlay')
-||
-authUI();
-
-});
-
-
-boot();
-
-</script>
-
-</body>
-  </html>
+document
+.getElementById("messageInput")
+?.addEventListener(
