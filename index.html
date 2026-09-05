@@ -1730,7 +1730,36 @@ view.innerHTML =
 
 loadChannels();
 
-}
+}<script>
+document.querySelectorAll("nav button").forEach(function(button) {
+    button.addEventListener("click", function() {
+
+        const match = this.getAttribute("onclick");
+
+        if (!match) return;
+
+        const id = match.match(/show\('([^']+)'/);
+
+        if (!id) return;
+
+        document.querySelectorAll(".page").forEach(function(page) {
+            page.classList.remove("active");
+        });
+
+        const target = document.getElementById(id[1]);
+
+        if (target) {
+            target.classList.add("active");
+        }
+
+        document.querySelectorAll("nav button").forEach(function(btn) {
+            btn.classList.remove("active");
+        });
+
+        this.classList.add("active");
+    });
+});
+</script>
 );
 
 
