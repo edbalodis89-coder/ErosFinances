@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="lt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EBK FINANCES</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#090909;color:#eee;font:15px Arial,sans-serif}
+.app{min-height:100vh;display:flex}.side{width:245px;position:fixed;inset:0 auto 0 0;background:#101010;border-right:1px solid #292929;padding:24px 15px}
+.logo{font-size:22px;font-weight:800;letter-spacing:2px;color:#d5b45a;margin:0 12px 28px}
+nav button{width:100%;border:0;background:transparent;color:#aaa;text-align:left;padding:12px;border-radius:10px;margin:2px 0;cursor:pointer}
+nav button:hover,nav button.active{background:#1d1a13;color:#e2c56b}
+.main{margin-left:245px;width:calc(100% - 245px);padding:28px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}
+h1{margin:0;font-size:29px}.sub{color:#777;margin-top:7px}.creator{border:1px solid #695522;background:#17130a;color:#e1c36a;padding:9px 14px;border-radius:20px;font-weight:bold}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.card,.panel{background:#111;border:1px solid #292929;border-radius:15px;padding:20px}.value{font-size:28px;font-weight:800;margin-top:8px}.label{color:#777;font-size:13px}
+.grid{display:grid;grid-template-columns:2fr 1fr;gap:17px;margin-top:17px}.item{display:flex;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid #222}.item:last-child{border:0}.icon{width:38px;height:38px;display:grid;place-items:center;background:#191919;border-radius:10px;font-size:20px}
+.badges{display:flex;flex-wrap:wrap;gap:9px}.badge{padding:9px 11px;border:1px solid #333;border-radius:11px;background:#181818}.gold{border-color:#80662a;color:#e2c56b}
+.page{display:none}.page.active{display:block}.btn{background:#c6a44e;border:0;border-radius:9px;padding:10px 15px;font-weight:bold}
+@media(max-width:800px){.side{width:72px;padding:20px 7px}.logo{font-size:0;text-align:center}.logo:after{content:"EBK";font-size:18px}nav button{font-size:0;text-align:center}nav button:first-letter{font-size:20px}.main{margin-left:72px;width:calc(100% - 72px);padding:18px}.cards{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side"><div class="logo">EBK FINANCES</div><nav>
+<button class="active" onclick="show('home',this)">🏠 Pagrindinis</button>
+<button onclick="show('profile',this)">👤 Profilis</button>
+<button onclick="show('chat',this)">💬 Bendravimas</button>
+<button onclick="show('games',this)">🎮 Žaidimai</button>
+<button onclick="show('casino',this)">🎰 Kazino</button>
+<button onclick="show('badges',this)">🏅 Ženkliukai</button>
+<button onclick="show('creator',this)">⚜️ Creator CP</button>
+</nav></aside>
+<main class="main">
+<section id="home" class="page active"><div class="top"><div><h1>EBK FINANCES</h1><div class="sub">Tavo finansų ir bendruomenės centras</div></div><div class="creator">⚜️ EBK · CREATOR</div></div>
+<div class="cards"><div class="card"><div class="label">LVL</div><div class="value">1</div></div><div class="card"><div class="label">POINTS</div><div class="value">0</div></div><div class="card"><div class="label">PLUS</div><div class="value">0</div></div><div class="card"><div class="label">DIAMONDS</div><div class="value">0 💎</div></div></div>
+<div class="grid"><div class="panel"><h2>Greita prieiga</h2><div class="item"><div class="icon">💬</div><div><b>Bendravimas</b><br><span class="label">Kanalai, temos ir žinutės</span></div></div><div class="item"><div class="icon">🏅</div><div><b>Pasiekimai</b><br><span class="label">Ženkliukai, Plus ir Diamonds</span></div></div><div class="item"><div class="icon">🎮</div><div><b>Žaidimai</b><br><span class="label">Bendruomenės žaidimų zona</span></div></div></div>
+<div class="panel"><h2>Tavo ženkliukai</h2><div class="badges"><span class="badge">🌱 Naujokas</span><span class="badge gold">➕ PLUS I</span><span class="badge">💎 Diamond</span></div></div></div></section>
+
+<section id="profile" class="page"><div class="top"><div><h1>👤 Profilis</h1><div class="sub">Vartotojo informacija ir pasiekimai</div></div></div><div class="panel"><h2>EBK</h2><div class="cards"><div class="card"><div class="label">LVL</div><div class="value">1</div></div><div class="card"><div class="label">POINTS</div><div class="value">0</div></div><div class="card"><div class="label">PLUS</div><div class="value">0</div></div><div class="card"><div class="label">DIAMONDS</div><div class="value">0 💎</div></div></div></div></section>
+
+<section id="chat" class="page"><div class="top"><div><h1>💬 Bendravimas</h1><div class="sub">Kanalai · Temos · Žinutės</div></div><button class="btn">+ Naujas kanalas</button></div><div class="panel"><div class="item"><div class="icon">📢</div><div><b>General</b><br><span class="label">Pagrindinis bendruomenės kanalas</span></div></div><div class="item"><div class="icon">💰</div><div><b>Finansai</b><br><span class="label">Finansų diskusijos</span></div></div><div class="item"><div class="icon">🎮</div><div><b>Žaidimai</b><br><span class="label">Žaidimų temos</span></div></div></div></section>
+
+<section id="games" class="page"><div class="top"><div><h1>🎮 Žaidimai</h1><div class="sub">Bendruomenės žaidimų zona</div></div></div><div class="cards"><div class="card"><div class="value">🎮</div><h3>Žaidimų centras</h3><div class="label">Žaidimų temos ir turnyrai.</div></div><div class="card"><div class="value">🏆</div><h3>Reitingai</h3><div class="label">Pasiekimai ir reitingai.</div></div></div></section>
+
+<section id="casino" class="page"><div class="top"><div><h1>🎰 Kazino</h1><div class="sub">Žaidimų zona</div></div></div><div class="panel"><h2>Kazino</h2><div class="label">Šiuo metu tik sąsajos vieta. Realių pinigų funkcijų nėra.</div></div></section>
+
+<section id="badges" class="page"><div class="top"><div><h1>🏅 Ženkliukai</h1><div class="sub">Pasiekimų sistema</div></div></div><div class="panel"><div class="badges"><span class="badge">🌱 Naujokas</span><span class="badge">⭐ Narys</span><span class="badge">⚡ Aktyvus</span><span class="badge">🛡️ Patikimas</span><span class="badge">🎓 Ekspertas</span><span class="badge">🏅 Meistras</span><span class="badge">➕ PLUS I</span><span class="badge">➕➕ PLUS II</span><span class="badge">✚✚✚ PLUS VI</span><span class="badge gold">💎 DIAMOND 250</span><span class="badge gold">💎💎 DIAMOND 500</span><span class="badge gold">💎💎💎 DIAMOND 1000</span><span class="badge gold">👑 EBK KARŪNA</span><span class="badge gold">🏆 EBK LEGENDA</span><span class="badge gold">⚜️ EBK CREATOR</span></div></div></section>
+
+<section id="creator" class="page"><div class="top"><div><h1>⚜️ Creator CP</h1><div class="sub">Privatus sistemos valdymo centras</div></div></div><div class="cards"><div class="card"><div class="value">👥</div><h3>Vartotojai</h3><div class="label">Profiliai, LVL, points, Plus, Diamonds</div></div><div class="card"><div class="value">📢</div><h3>Kanalai</h3><div class="label">Kanalų ir temų kontrolė</div></div><div class="card"><div class="value">🏅</div><h3>Ženkliukai</h3><div class="label">Apdovanojimų valdymas</div></div><div class="card"><div class="value">🔐</div><h3>Saugumas</h3><div class="label">Creator-only ir audit log</div></div></div></section>
+</main></div>
+<script>
+function show(id,b){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active')}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://elbaqghpzpdelmmllreo.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_eetKZzjXQGpGD2s8-Tq9WQ_Wwa75k8p";
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+async function loadEBKData(){
+  try{
+    const { data: sessionData } = await supabaseClient.auth.getSession();
+    const user = sessionData?.session?.user;
+    if(!user) return;
+
+    const { data: profile } = await supabaseClient
+      .from("profiles")
+      .select("id,username,full_name,avatar_url,role,level,points,pluses,diamonds")
+      .eq("id", user.id)
+      .single();
+
+    if(profile){
+      document.querySelectorAll(".value")[0].textContent = profile.level ?? 1;
+      document.querySelectorAll(".value")[1].textContent = profile.points ?? 0;
+      document.querySelectorAll(".value")[2].textContent = profile.pluses ?? 0;
+      document.querySelectorAll(".value")[3].textContent = (profile.diamonds ?? 0) + " 💎";
+      document.querySelectorAll(".creator")[0].textContent =
+        profile.role === "creator" ? "⚜️ EBK · CREATOR" : "👤 " + (profile.username || profile.full_name || "Vartotojas");
+    }
+  }catch(err){
+    console.error("EBK Supabase:", err);
+  }
+}
+
+loadEBKData();
+</script>
+
+</body></html>
