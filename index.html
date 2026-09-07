@@ -2,2756 +2,530 @@
 <html lang="lt">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>EBK FINANCES</title>
-
 <style>
+:root{--bg:#070707;--card:#111;--line:#292929;--gold:#d6b75d;--text:#eee;--muted:#929292;--danger:#d9534f;--ok:#5bc47b}
 *{box-sizing:border-box}
-
-html,body{
-    margin:0;
-    min-height:100%;
-    background:#090909;
-    color:#eee;
-    font-family:Arial,Helvetica,sans-serif;
-}
-
-button,input{
-    font:inherit;
-}
-
-button{
-    cursor:pointer;
-}
-
-.app{
-    min-height:100vh;
-    display:flex;
-}
-
-/* SIDEBAR */
-
-.side{
-    width:245px;
-    position:fixed;
-    left:0;
-    top:0;
-    bottom:0;
-    background:#101010;
-    border-right:1px solid #292929;
-    padding:24px 15px;
-    z-index:20;
-}
-
-.logo{
-    color:#d5b45a;
-    font-size:22px;
-    font-weight:800;
-    letter-spacing:2px;
-    margin:0 12px 28px;
-}
-
-.nav{
-    display:flex;
-    flex-direction:column;
-}
-
-.nav-btn{
-    width:100%;
-    border:0;
-    background:transparent;
-    color:#aaa;
-    text-align:left;
-    padding:13px 12px;
-    border-radius:10px;
-    margin:2px 0;
-}
-
-.nav-btn:hover,
-.nav-btn.active{
-    background:#1d1a13;
-    color:#e2c56b;
-}
-
-/* MAIN */
-
-.main{
-    margin-left:245px;
-    width:calc(100% - 245px);
-    padding:28px;
-}
-
-.page{
-    display:none;
-}
-
-.page.active{
-    display:block;
-}
-
-.top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-    margin-bottom:25px;
-}
-
-h1{
-    margin:0;
-    font-size:29px;
-}
-
-h2{
-    margin-top:0;
-}
-
-.sub{
-    color:#777;
-    margin-top:7px;
-}
-
-/* BUTTONS */
-
-.btn{
-    border:0;
-    border-radius:9px;
-    padding:10px 15px;
-    background:#c6a44e;
-    color:#111;
-    font-weight:bold;
-}
-
-.btn:hover{
-    background:#e0c46b;
-}
-
-.btn.secondary{
-    background:#191919;
-    color:#e2c56b;
-    border:1px solid #695522;
-}
-
-/* CARDS */
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
-}
-
-.card,
-.panel{
-    background:#111;
-    border:1px solid #292929;
-    border-radius:15px;
-    padding:20px;
-}
-
-.value{
-    font-size:28px;
-    font-weight:800;
-    margin-top:8px;
-}
-
-.label{
-    color:#777;
-    font-size:13px;
-}
-
-.grid{
-    display:grid;
-    grid-template-columns:2fr 1fr;
-    gap:17px;
-    margin-top:17px;
-}
-
-/* ITEMS */
-
-.item{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:14px 0;
-    border-bottom:1px solid #222;
-}
-
-.item:last-child{
-    border-bottom:0;
-}
-
-.icon{
-    width:40px;
-    height:40px;
-    display:grid;
-    place-items:center;
-    background:#191919;
-    border-radius:10px;
-    font-size:20px;
-}
-
-.clickable{
-    cursor:pointer;
-}
-
-.clickable:hover{
-    background:#181818;
-    border-radius:10px;
-}
-
-/* BADGES */
-
-.badges{
-    display:flex;
-    flex-wrap:wrap;
-    gap:9px;
-}
-
-.badge{
-    padding:9px 11px;
-    border:1px solid #333;
-    border-radius:11px;
-    background:#181818;
-}
-
-.gold{
-    border-color:#80662a;
-    color:#e2c56b;
-}
-
-/* AUTH */
-
-.auth-overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.94);
-    z-index:9999;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:16px;
-}
-
-.auth-box{
-    width:min(430px,100%);
-    background:#111;
-    border:1px solid #80662a;
-    border-radius:18px;
-    padding:24px;
-    box-shadow:0 20px 70px #000;
-}
-
-.auth-box h2{
-    color:#e2c56b;
-    margin:0 0 6px;
-}
-
-.auth-input{
-    width:100%;
-    padding:13px;
-    margin:7px 0;
-    background:#181818;
-    border:1px solid #333;
-    border-radius:9px;
-    color:#fff;
-    outline:none;
-}
-
-.auth-input:focus{
-    border-color:#80662a;
-}
-
-.auth-row{
-    display:flex;
-    gap:8px;
-    margin-top:8px;
-}
-
-.auth-row .btn{
-    flex:1;
-}
-
-.auth-msg{
-    min-height:22px;
-    margin-top:12px;
-    color:#e2c56b;
-    font-size:13px;
-}
-
-/* CHAT */
-
-.chat-layout{
-    display:grid;
-    grid-template-columns:240px 1fr;
-    gap:15px;
-}
-
-.channel-list{
-    max-height:520px;
-    overflow:auto;
-}
-
-.channel{
-    padding:12px;
-    border-radius:10px;
-    cursor:pointer;
-    margin-bottom:5px;
-}
-
-.channel:hover,
-.channel.active{
-    background:#1d1a13;
-}
-
-.channel-name{
-    color:#eee;
-    font-weight:bold;
-}
-
-.channel-description{
-    color:#777;
-    font-size:12px;
-    margin-top:4px;
-}
-
-.chat-box{
-    min-height:500px;
-    display:flex;
-    flex-direction:column;
-}
-
-.messages{
-    flex:1;
-    min-height:300px;
-    max-height:390px;
-    overflow:auto;
-    margin:10px 0;
-    padding-right:5px;
-}
-
-.msg{
-    padding:10px 0;
-    border-bottom:1px solid #222;
-}
-
-.msg-user{
-    color:#e2c56b;
-    font-weight:bold;
-}
-
-.msg-time{
-    color:#555;
-    font-size:11px;
-    margin-left:7px;
-}
-
-.send-row{
-    display:flex;
-    gap:8px;
-}
-
-.chat-input{
-    flex:1;
-    padding:12px;
-    background:#181818;
-    border:1px solid #333;
-    border-radius:9px;
-    color:#fff;
-    outline:none;
-}
-
-/* MODAL */
-
-.modal{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.8);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    z-index:5000;
-    padding:16px;
-}
-
-.modal.show{
-    display:flex;
-}
-
-.modal-box{
-    width:min(430px,100%);
-    background:#111;
-    border:1px solid #80662a;
-    border-radius:16px;
-    padding:22px;
-}
-
-.modal-input{
-    width:100%;
-    padding:12px;
-    margin:7px 0;
-    background:#181818;
-    color:#fff;
-    border:1px solid #333;
-    border-radius:9px;
-}
-
-.modal-actions{
-    display:flex;
-    gap:8px;
-    margin-top:10px;
-}
-
-.modal-actions button{
-    flex:1;
-}
-
-/* CREATOR */
-
-.creator-panel{
-    display:none;
-}
-
-.creator-user .creator-panel{
-    display:block;
-}
-
-/* MOBILE */
-
+body{margin:0;background:var(--bg);color:var(--text);font:14px Arial,sans-serif}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+aside{position:fixed;left:0;top:0;bottom:0;width:230px;background:#0d0d0d;border-right:1px solid var(--line);padding:15px;z-index:20;overflow:auto}
+.logo{font-size:25px;font-weight:900;color:var(--gold);text-align:center;padding:15px 5px 22px}
+.logo small{display:block;font-size:9px;color:#777;letter-spacing:3px;margin-top:4px}
+nav button{width:100%;display:block;text-align:left;background:none;color:#aaa;border:0;border-radius:9px;padding:11px;margin:3px 0}
+nav button:hover,nav button.active{background:#211d11;color:var(--gold)}
+nav button span{display:inline-block;width:25px}
+main{margin-left:230px;padding:25px;max-width:1500px}
+.page{display:none}.page.active{display:block}
+h1,h2,h3{margin-top:0}
+h1{font-size:28px}.gold{color:var(--gold)}
+.box,.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:12px 0}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.grid2{display:grid;grid-template-columns:2fr 1fr;gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+input,select,textarea{background:#171717;color:#fff;border:1px solid #333;border-radius:8px;padding:10px;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--gold)}
+textarea{width:100%;min-height:90px;resize:vertical}
+button.primary,.primary{background:var(--gold);color:#111;border:1px solid #8e742d;border-radius:8px;padding:9px 13px;font-weight:700}
+button.secondary{background:#191919;color:#ddd;border:1px solid #333;border-radius:8px;padding:9px 13px}
+button.danger{background:#351515;color:#ff9b97;border:1px solid #67302d;border-radius:8px;padding:9px 13px}
+button:hover{filter:brightness(1.1)}
+.muted{color:var(--muted)}
+.stat{padding:16px;margin:0}.big{font-size:27px;font-weight:800;margin-top:5px}
+table{width:100%;border-collapse:collapse}td,th{padding:10px;border-bottom:1px solid #222;text-align:left}th{color:var(--gold)}
+.badge{display:inline-flex;align-items:center;gap:5px;background:#211d11;border:1px solid #6f5b27;color:var(--gold);padding:5px 9px;border-radius:20px;margin:3px;font-size:12px}
+.progress{height:8px;background:#222;border-radius:20px;overflow:hidden}.progress i{display:block;height:100%;background:var(--gold)}
+.chat{display:grid;grid-template-columns:230px 1fr;gap:12px}
+.channel{padding:10px;border-radius:8px;cursor:pointer}.channel:hover,.channel.active{background:#211d11;color:var(--gold)}
+.messages{height:390px;overflow:auto;border-top:1px solid #222;border-bottom:1px solid #222;padding:8px}
+.msg{padding:9px 0;border-bottom:1px solid #222}.msg b{color:var(--gold)}
+.auth,.modal{position:fixed;inset:0;background:#000d;display:none;align-items:center;justify-content:center;padding:15px;z-index:100}
+.auth.show,.modal.show{display:flex}.authbox,.modal .box{width:min(450px,100%)}
+.authbox input{display:block;width:100%;margin:7px 0}
+.notice{padding:12px;border-radius:9px;background:#171717;border:1px solid #333;margin:10px 0}
+.notice.ok{border-color:#285c39}.notice.err{border-color:#6b2927}
+.kpi{font-size:12px;color:#888}.empty{text-align:center;padding:30px;color:#777}
+.profile{display:flex;gap:15px;align-items:center}.avatar{width:60px;height:60px;border-radius:50%;background:#211d11;color:var(--gold);display:grid;place-items:center;font-size:24px;font-weight:bold}
+.hidden{display:none!important}
+footer{color:#666;text-align:center;padding:30px}
 @media(max-width:800px){
-
-    .side{
-        width:72px;
-        padding:20px 7px;
-    }
-
-    .logo{
-        font-size:0;
-        text-align:center;
-        margin:0 0 25px;
-    }
-
-    .logo:after{
-        content:"EBK";
-        font-size:18px;
-    }
-
-    .nav-btn{
-        font-size:0;
-        text-align:center;
-        padding:14px 5px;
-    }
-
-    .nav-btn .nav-icon{
-        font-size:21px;
-    }
-
-    .main{
-        margin-left:72px;
-        width:calc(100% - 72px);
-        padding:16px;
-    }
-
-    .cards{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .grid{
-        grid-template-columns:1fr;
-    }
-
-    .chat-layout{
-        grid-template-columns:1fr;
-    }
-
-    .channel-list{
-        max-height:220px;
-    }
-
-    .top{
-        align-items:flex-start;
-    }
-
-    h1{
-        font-size:24px;
-    }
-}
-
-@media(max-width:500px){
-
-    .cards{
-        gap:8px;
-    }
-
-    .card,
-    .panel{
-        padding:15px;
-    }
-
-    .value{
-        font-size:24px;
-    }
-
-    .send-row{
-        flex-direction:column;
-    }
+ aside{width:65px;padding:6px}.logo{font-size:17px;padding:12px 0}.logo small{display:none}
+ nav button{font-size:0;text-align:center}nav button span{font-size:19px;width:auto}
+ main{margin-left:65px;padding:14px}.cards,.grid2,.grid3,.chat{grid-template-columns:1fr}
+ .row input,.row select{flex:1;min-width:130px}
 }
 </style>
 </head>
-
 <body>
 
-<div class="app">
-
-<!-- SIDEBAR -->
-
-<aside class="side">
-
-    <div class="logo">EBK FINANCES</div>
-
-    <nav class="nav">
-
-        <button class="nav-btn active" data-page="home">
-            <span class="nav-icon">🏠</span>
-            <span>Pagrindinis</span>
-        </button>
-
-        <button class="nav-btn" data-page="profile">
-            <span class="nav-icon">👤</span>
-            <span>Profilis</span>
-        </button>
-
-        <button class="nav-btn" data-page="chat">
-            <span class="nav-icon">💬</span>
-            <span>Bendravimas</span>
-        </button>
-
-        <button class="nav-btn" data-page="games">
-            <span class="nav-icon">🎮</span>
-            <span>Žaidimai</span>
-        </button>
-
-        <button class="nav-btn" data-page="casino">
-            <span class="nav-icon">🎰</span>
-            <span>Kazino</span>
-        </button>
-
-        <button class="nav-btn" data-page="badges">
-            <span class="nav-icon">🏅</span>
-            <span>Ženkliukai</span>
-        </button>
-
-        <button class="nav-btn" data-page="creator">
-            <span class="nav-icon">⚜️</span>
-            <span>Creator CP</span>
-        </button>
-
-    </nav>
+<aside>
+  <div class="logo">EBK<small>FINANCES</small></div>
+  <nav id="nav">
+    <button data-page="dashboard"><span>⌂</span> Dashboard</button>
+    <button data-page="markets"><span>◈</span> Markets</button>
+    <button data-page="portfolio"><span>▣</span> Portfolio</button>
+    <button data-page="transactions"><span>↔</span> Transactions</button>
+    <button data-page="quiz"><span>?</span> Quiz</button>
+    <button data-page="games"><span>◆</span> Games</button>
+    <button data-page="community"><span>☷</span> Community</button>
+    <button data-page="badges"><span>★</span> Badges</button>
+    <button data-page="profile"><span>●</span> Profile</button>
+    <button id="adminNav" class="hidden" data-page="admin"><span>⚙</span> Admin CP</button>
+    <button id="creatorNav" class="hidden" data-page="creator"><span>✦</span> Creator CP</button>
+  </nav>
+  <button id="logoutBtn" class="secondary" style="width:100%;margin-top:12px">Atsijungti</button>
 </aside>
 
+<main>
 
-<!-- MAIN -->
-
-<main class="main">
-
-<!-- HOME -->
-
-<section id="home" class="page active">
-
-    <div class="top">
-
-        <div>
-            <h1>EBK FINANCES</h1>
-            <div class="sub">
-                Tavo finansų ir bendruomenės centras
-            </div>
-        </div>
-
-        <div id="userArea"></div>
-
-    </div>
-
-
-    <div class="cards">
-
-        <div class="card">
-            <div class="label">LVL</div>
-            <div class="value" id="homeLevel">1</div>
-        </div>
-
-        <div class="card">
-            <div class="label">POINTS</div>
-            <div class="value" id="homePoints">0</div>
-        </div>
-
-        <div class="card">
-            <div class="label">PLUS</div>
-            <div class="value" id="homePluses">0</div>
-        </div>
-
-        <div class="card">
-            <div class="label">DIAMONDS</div>
-            <div class="value" id="homeDiamonds">0 💎</div>
-        </div>
-
-    </div>
-
-
-    <div class="grid">
-
-        <div class="panel">
-
-            <h2>Greita prieiga</h2>
-
-            <div class="item clickable quick-link" data-page="chat">
-                <div class="icon">💬</div>
-                <div>
-                    <b>Bendravimas</b><br>
-                    <span class="label">
-                        Kanalai, temos ir žinutės
-                    </span>
-                </div>
-            </div>
-
-            <div class="item clickable quick-link" data-page="badges">
-                <div class="icon">🏅</div>
-                <div>
-                    <b>Pasiekimai</b><br>
-                    <span class="label">
-                        Ženkliukai, Plus ir Diamonds
-                    </span>
-                </div>
-            </div>
-
-            <div class="item clickable quick-link" data-page="games">
-                <div class="icon">🎮</div>
-                <div>
-                    <b>Žaidimai</b><br>
-                    <span class="label">
-                        Bendruomenės žaidimų zona
-                    </span>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="panel">
-
-            <h2>Tavo ženkliukai</h2>
-
-            <div id="homeBadges" class="badges">
-                <span class="badge">🌱 Naujokas</span>
-            </div>
-
-        </div>
-
-    </div>
-
+<section id="dashboard" class="page">
+<h1>Dashboard</h1>
+<div class="cards">
+ <div class="stat"><div class="kpi">BALANSAS</div><div class="big gold" id="dashBalance">€0.00</div></div>
+ <div class="stat"><div class="kpi">INVESTICIJOS</div><div class="big" id="dashInvest">€0.00</div></div>
+ <div class="stat"><div class="kpi">PELNAS / NUOSTOLIS</div><div class="big" id="dashPnL">€0.00</div></div>
+ <div class="stat"><div class="kpi">LYGIS</div><div class="big" id="dashLevel">1</div></div>
+</div>
+<div class="grid2" style="margin-top:12px">
+ <div class="box"><h2>Portfelis</h2><div id="dashPortfolio"></div></div>
+ <div class="box"><h2>Pasiekimai</h2><div id="dashBadges"></div></div>
+</div>
+<div class="box"><h2>Paskutinė veikla</h2><div id="activity"></div></div>
 </section>
 
-
-<!-- PROFILE -->
-
-<section id="profile" class="page">
-
-    <div class="top">
-
-        <div>
-            <h1>👤 Profilis</h1>
-            <div class="sub">
-                Vartotojo informacija ir pasiekimai
-            </div>
-        </div>
-
-    </div>
-
-    <div class="panel">
-
-        <h2 id="profileName">EBK</h2>
-
-        <div class="label" id="profileEmail"></div>
-
-        <br>
-
-        <div class="cards">
-
-            <div class="card">
-                <div class="label">LVL</div>
-                <div class="value" id="profileLevel">1</div>
-            </div>
-
-            <div class="card">
-                <div class="label">POINTS</div>
-                <div class="value" id="profilePoints">0</div>
-            </div>
-
-            <div class="card">
-                <div class="label">PLUS</div>
-                <div class="value" id="profilePluses">0</div>
-            </div>
-
-            <div class="card">
-                <div class="label">DIAMONDS</div>
-                <div class="value" id="profileDiamonds">0 💎</div>
-            </div>
-
-        </div>
-
-    </div>
-
+<section id="markets" class="page">
+<h1>Markets</h1>
+<div class="box">
+ <div class="row">
+  <input id="marketSearch" placeholder="Ieškoti turto...">
+  <select id="marketType"><option value="all">Visi</option><option value="crypto">Crypto</option><option value="stock">Akcijos</option></select>
+ </div>
+</div>
+<div class="box"><table><thead><tr><th>Turtas</th><th>Tipas</th><th>Kaina</th><th>24h</th><th>Veiksmas</th></tr></thead><tbody id="marketTable"></tbody></table></div>
 </section>
 
-
-<!-- CHAT -->
-
-<section id="chat" class="page">
-
-    <div class="top">
-
-        <div>
-            <h1>💬 Bendravimas</h1>
-            <div class="sub">
-                Kanalai · Temos · Žinutės
-            </div>
-        </div>
-
-        <button id="newChannelBtn" class="btn" style="display:none">
-            + Naujas kanalas
-        </button>
-
-    </div>
-
-
-    <div class="chat-layout">
-
-        <div class="panel">
-
-            <h3>Kanalai</h3>
-
-            <div id="channelList" class="channel-list">
-                <div class="label">Kraunama...</div>
-            </div>
-
-        </div>
-
-
-        <div class="panel chat-box">
-
-            <div id="chatTitle">
-                <h2>Pasirink kanalą</h2>
-                <div class="label">
-                    Pasirink kanalą kairėje.
-                </div>
-            </div>
-
-            <div id="messages" class="messages">
-            </div>
-
-            <div class="send-row">
-
-                <input
-                    id="messageInput"
-                    class="chat-input"
-                    type="text"
-                    placeholder="Rašyti žinutę..."
-                    disabled
-                >
-
-                <button
-                    id="sendMessageBtn"
-                    class="btn"
-                    disabled
-                >
-                    Siųsti
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
+<section id="portfolio" class="page">
+<h1>Portfolio</h1>
+<div class="cards">
+ <div class="stat"><div class="kpi">CASH</div><div class="big" id="cashValue">€0.00</div></div>
+ <div class="stat"><div class="kpi">PORTFOLIO</div><div class="big" id="portfolioValue">€0.00</div></div>
+ <div class="stat"><div class="kpi">TOTAL</div><div class="big gold" id="totalValue">€0.00</div></div>
+ <div class="stat"><div class="kpi">P/L</div><div class="big" id="portfolioPnL">€0.00</div></div>
+</div>
+<div class="box"><h2>Mano turtas</h2><table><thead><tr><th>Turtas</th><th>Kiekis</th><th>Kaina</th><th>Vertė</th><th>P/L</th></tr></thead><tbody id="portfolioTable"></tbody></table></div>
 </section>
 
+<section id="transactions" class="page">
+<h1>Transactions</h1>
+<div class="box">
+ <div class="row">
+  <select id="txAsset"></select>
+  <select id="txSide"><option value="buy">Pirkti</option><option value="sell">Parduoti</option></select>
+  <input id="txQty" type="number" min="0" step="any" placeholder="Kiekis">
+  <button class="primary" id="txExecute">Vykdyti</button>
+ </div>
+ <div id="txMessage"></div>
+</div>
+<div class="box"><table><thead><tr><th>Data</th><th>Veiksmas</th><th>Turtas</th><th>Kiekis</th><th>Kaina</th><th>Suma</th></tr></thead><tbody id="txTable"></tbody></table></div>
+</section>
 
-<!-- GAMES -->
+<section id="quiz" class="page">
+<h1>Finance Quiz</h1>
+<div class="box" id="quizBox"></div>
+</section>
 
 <section id="games" class="page">
-
-    <div class="top">
-        <div>
-            <h1>🎮 Žaidimai</h1>
-            <div class="sub">
-                Bendruomenės žaidimų zona
-            </div>
-        </div>
-    </div>
-
-    <div class="cards">
-
-        <div class="card">
-            <div class="value">🎮</div>
-            <h3>Žaidimų centras</h3>
-            <div class="label">
-                Žaidimų temos ir turnyrai.
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="value">🏆</div>
-            <h3>Reitingai</h3>
-            <div class="label">
-                Pasiekimai ir reitingai.
-            </div>
-        </div>
-
-    </div>
-
+<h1>Finance Games</h1>
+<div class="grid3">
+ <div class="box"><h2>Market Guess</h2><p class="muted">Atspėk, ar kaina kils ar kris.</p><button class="primary" onclick="playGuess('up')">▲ Kils</button> <button class="secondary" onclick="playGuess('down')">▼ Kris</button><div id="guessResult"></div></div>
+ <div class="box"><h2>Number Challenge</h2><p>Pasirink skaičių nuo 1 iki 10.</p><input id="gameNum" type="number" min="1" max="10"><button class="primary" onclick="playNumber()">Tikrinti</button><div id="numberResult"></div></div>
+ <div class="box"><h2>XP</h2><div class="big gold" id="gameXP">0 XP</div><p class="muted">Žaisk ir rink patirties taškus.</p></div>
+</div>
 </section>
 
-
-<!-- CASINO -->
-
-<section id="casino" class="page">
-
-    <div class="top">
-        <div>
-            <h1>🎰 Kazino</h1>
-            <div class="sub">
-                Žaidimų zona
-            </div>
-        </div>
-    </div>
-
-    <div class="panel">
-
-        <h2>Kazino</h2>
-
-        <div class="label">
-            Šiuo metu tik sąsajos vieta.
-            Realių pinigų funkcijų nėra.
-        </div>
-
-    </div>
-
+<section id="community" class="page">
+<h1>Community</h1>
+<div class="chat">
+ <div class="box"><h3>Kanalai</h3><div class="channel active" data-channel="general"># general</div><div class="channel" data-channel="markets"># markets</div><div class="channel" data-channel="crypto"># crypto</div></div>
+ <div class="box"><h3 id="channelTitle"># general</h3><div class="messages" id="messages"></div><div class="row" style="margin-top:10px"><input id="chatInput" style="flex:1" placeholder="Rašyti žinutę..."><button class="primary" id="sendChat">Siųsti</button></div></div>
+</div>
 </section>
-
-
-<!-- BADGES -->
 
 <section id="badges" class="page">
-
-    <div class="top">
-        <div>
-            <h1>🏅 Ženkliukai</h1>
-            <div class="sub">
-                Pasiekimų sistema
-            </div>
-        </div>
-    </div>
-
-    <div class="panel">
-
-        <div id="badgesList" class="badges">
-
-            <span class="badge">🌱 Naujokas</span>
-            <span class="badge">⭐ Narys</span>
-            <span class="badge">⚡ Aktyvus</span>
-            <span class="badge">🛡️ Patikimas</span>
-            <span class="badge">🎓 Ekspertas</span>
-            <span class="badge">🏅 Meistras</span>
-            <span class="badge">➕ PLUS I</span>
-            <span class="badge">➕➕ PLUS II</span>
-            <span class="badge gold">💎 DIAMOND 250</span>
-            <span class="badge gold">💎 DIAMOND 500</span>
-            <span class="badge gold">💎 DIAMOND 1000</span>
-            <span class="badge gold">👑 EBK KARŪNA</span>
-            <span class="badge gold">🏆 EBK LEGENDA</span>
-            <span class="badge gold">⚜️ EBK CREATOR</span>
-
-        </div>
-
-    </div>
-
+<h1>Badges</h1>
+<div class="box"><p class="muted">Ženkliukai suteikiami už pasiekimus, veiklą, lygius, viktorinas, žaidimus ir bendruomenės veiklą.</p><div id="allBadges"></div></div>
 </section>
 
+<section id="profile" class="page">
+<h1>Profile</h1>
+<div class="box">
+ <div class="profile"><div class="avatar" id="avatar">U</div><div><h2 id="profileName">User</h2><div class="muted" id="profileEmail"></div></div></div>
+ <hr style="border-color:#222">
+ <div class="grid2">
+  <div><label>Vardas</label><input id="editName" style="width:100%;margin-top:6px"></div>
+  <div><label>El. paštas</label><input id="editEmail" style="width:100%;margin-top:6px"></div>
+ </div>
+ <button class="primary" style="margin-top:12px" id="saveProfile">Išsaugoti</button>
+ <div id="profileMsg"></div>
+</div>
+</section>
 
-<!-- CREATOR -->
+<section id="admin" class="page">
+<h1>Admin CP</h1>
+<div class="cards">
+ <div class="stat"><div class="kpi">VARTOTOJAI</div><div class="big" id="adminUsers">0</div></div>
+ <div class="stat"><div class="kpi">TRANSAKCIJOS</div><div class="big" id="adminTx">0</div></div>
+ <div class="stat"><div class="kpi">ŽINUTĖS</div><div class="big" id="adminMsgs">0</div></div>
+ <div class="stat"><div class="kpi">BADGES</div><div class="big" id="adminBadges">0</div></div>
+</div>
+<div class="box"><h2>Vartotojai</h2><table><thead><tr><th>Vardas</th><th>Email</th><th>Rolė</th><th>XP</th><th>Veiksmai</th></tr></thead><tbody id="adminUsersTable"></tbody></table></div>
+<div class="box"><h2>Sistemos valdymas</h2><div class="row"><button class="primary" onclick="resetDemo()">Atstatyti mano demo duomenis</button><button class="danger" onclick="clearAllData()">Ištrinti vietinius duomenis</button></div></div>
+</section>
 
 <section id="creator" class="page">
-
-    <div class="top">
-
-        <div>
-            <h1>⚜️ Creator CP</h1>
-            <div class="sub">
-                Privatus sistemos valdymo centras
-            </div>
-        </div>
-
-    </div>
-
-
-    <div id="creatorLocked" class="panel">
-
-        <h2>🔒 Creator-only</h2>
-
-        <div class="label">
-            Ši zona prieinama tik Creator.
-        </div>
-
-    </div>
-
-
-    <div id="creatorContent" class="creator-panel">
-
-        <div class="cards">
-
-            <div class="card">
-                <div class="value">👥</div>
-                <h3>Vartotojai</h3>
-                <div class="label">
-                    Profiliai, LVL, Points, Plus, Diamonds
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="value">📢</div>
-                <h3>Kanalai</h3>
-                <div class="label">
-                    Kanalų ir temų kontrolė
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="value">🏅</div>
-                <h3>Ženkliukai</h3>
-                <div class="label">
-                    Apdovanojimų valdymas
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="value">🔐</div>
-                <h3>Saugumas</h3>
-                <div class="label">
-                    Creator-only ir audit log
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-
+<h1>Creator CP</h1>
+<div class="grid2">
+ <div class="box"><h2>Kurti viktorinos klausimą</h2>
+  <input id="newQuestion" style="width:100%;margin-bottom:7px" placeholder="Klausimas">
+  <input id="answer1" style="width:100%;margin-bottom:7px" placeholder="Atsakymas A">
+  <input id="answer2" style="width:100%;margin-bottom:7px" placeholder="Atsakymas B">
+  <input id="answer3" style="width:100%;margin-bottom:7px" placeholder="Atsakymas C">
+  <input id="answer4" style="width:100%;margin-bottom:7px" placeholder="Atsakymas D">
+  <select id="correctAnswer" style="width:100%;margin-bottom:7px"><option value="0">A teisingas</option><option value="1">B teisingas</option><option value="2">C teisingas</option><option value="3">D teisingas</option></select>
+  <button class="primary" onclick="createQuestion()">Pridėti</button><div id="creatorMsg"></div>
+ </div>
+ <div class="box"><h2>Esami klausimai</h2><div id="questionList"></div></div>
+</div>
 </section>
 
+<footer>EBK FINANCES • Demo finansinė platforma</footer>
 </main>
+
+<div class="auth show" id="auth">
+ <div class="box authbox">
+  <div class="logo">EBK<small>FINANCES</small></div>
+  <div id="authMessage"></div>
+  <div id="loginForm">
+   <h2>Prisijungimas</h2>
+   <input id="loginEmail" type="email" placeholder="El. paštas">
+   <input id="loginPassword" type="password" placeholder="Slaptažodis">
+   <button class="primary" style="width:100%;margin-top:5px" onclick="login()">Prisijungti</button>
+   <p class="muted">Neturi paskyros? <a href="#" onclick="showRegister();return false" class="gold">Registruotis</a></p>
+  </div>
+  <div id="registerForm" class="hidden">
+   <h2>Registracija</h2>
+   <input id="regName" placeholder="Vardas">
+   <input id="regEmail" type="email" placeholder="El. paštas">
+   <input id="regPassword" type="password" placeholder="Slaptažodis">
+   <input id="regPassword2" type="password" placeholder="Pakartokite slaptažodį">
+   <button class="primary" style="width:100%;margin-top:5px" onclick="register()">Sukurti paskyrą</button>
+   <p class="muted">Jau turite paskyrą? <a href="#" onclick="showLogin();return false" class="gold">Prisijungti</a></p>
+  </div>
+ </div>
 </div>
-
-
-<!-- NEW CHANNEL MODAL -->
-
-<div id="channelModal" class="modal">
-
-    <div class="modal-box">
-
-        <h2>+ Naujas kanalas</h2>
-
-        <input
-            id="channelName"
-            class="modal-input"
-            placeholder="Kanalo pavadinimas"
-        >
-
-        <input
-            id="channelDescription"
-            class="modal-input"
-            placeholder="Aprašymas"
-        >
-
-        <div class="modal-actions">
-
-            <button
-                id="cancelChannelBtn"
-                class="btn secondary">
-                Atšaukti
-            </button>
-
-            <button
-                id="createChannelBtn"
-                class="btn">
-                Sukurti
-            </button>
-
-        </div>
-
-        <div id="channelMsg" class="auth-msg"></div>
-
-    </div>
-
-</div>
-
-
-<!-- SUPABASE -->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
+"use strict";
 
-/* =========================================================
-   SUPABASE
-========================================================= */
+const KEY="ebk_finances_v1";
 
-const SUPABASE_URL =
-"https://elbaqghpzpdelmmllreo.supabase.co";
+const assets=[
+ {s:"BTC",name:"Bitcoin",type:"crypto",price:105000,change:1.82},
+ {s:"ETH",name:"Ethereum",type:"crypto",price:4300,change:2.14},
+ {s:"AAVE",name:"Aave",type:"crypto",price:310,change:3.41},
+ {s:"SOL",name:"Solana",type:"crypto",price:205,change:-1.13},
+ {s:"SUI",name:"Sui",type:"crypto",price:3.55,change:1.27},
+ {s:"AAPL",name:"Apple",type:"stock",price:238,change:.61},
+ {s:"MSFT",name:"Microsoft",type:"stock",price:505,change:.32},
+ {s:"NVDA",name:"NVIDIA",type:"stock",price:176,change:2.02},
+ {s:"TSLA",name:"Tesla",type:"stock",price:345,change:-.84},
+ {s:"AMZN",name:"Amazon",type:"stock",price:231,change:.47}
+];
 
-const SUPABASE_PUBLISHABLE_KEY =
-"sb_publishable_eetKZzjXQGpGD2s8-Tq9WQ_Wwa75k8p";
+const badgeDefs=[
+ {id:"welcome",icon:"◆",name:"Welcome",desc:"Sukūrei paskyrą",xp:10},
+ {id:"first_trade",icon:"◈",name:"First Trade",desc:"Atlikai pirmą sandorį",xp:20},
+ {id:"trader",icon:"⚡",name:"Active Trader",desc:"Atlikai 10 sandorių",xp:50},
+ {id:"quiz",icon:"?",name:"Quiz Master",desc:"Teisingai atsakei į viktoriną",xp:30},
+ {id:"gamer",icon:"◆",name:"Player",desc:"Surinkai XP žaisdamas",xp:30},
+ {id:"community",icon:"☷",name:"Community",desc:"Parašei bendruomenėje",xp:20},
+ {id:"level5",icon:"★",name:"Level 5",desc:"Pasiekei 5 lygį",xp:100}
+];
 
-const supabaseClient =
-window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-);
+const defaultQuestions=[
+ {q:"Ką reiškia diversifikacija?",a:["Investuoti tik į vieną turtą","Rizikos paskirstymas tarp skirtingų aktyvų","Parduoti visas investicijas","Skolintis pinigų"],c:1},
+ {q:"Kas yra akcija?",a:["Įmonės nuosavybės dalis","Banko paskola","Kriptovaliuta","Mokestis"],c:0},
+ {q:"Kas paprastai nutinka obligacijos kainai kylant palūkanoms?",a:["Ji visada kyla","Dažnai mažėja","Nesikeičia","Tampa akcija"],c:1},
+ {q:"Kas yra rinkos kapitalizacija?",a:["Vienos akcijos kaina","Visų įmonės akcijų rinkos vertė","Metinis pelnas","Dividendų suma"],c:1}
+];
 
+function load(){
+ let x=localStorage.getItem(KEY);
+ if(x)return JSON.parse(x);
+ return {users:[],current:null,transactions:[],chats:{general:[],markets:[],crypto:[]},questions:defaultQuestions,xp:{},portfolios:{},badges:{},activity:[]};
+}
+let db=load();
 
-/* =========================================================
-   STATE
-========================================================= */
+function save(){localStorage.setItem(KEY,JSON.stringify(db))}
+function currentUser(){return db.users.find(u=>u.id===db.current)}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2)}
+function money(n){return "€"+Number(n||0).toLocaleString("lt-LT",{minimumFractionDigits:2,maximumFractionDigits:2})}
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function asset(s){return assets.find(a=>a.s===s)}
+function xp(){return db.xp[db.current]||0}
+function level(){return Math.max(1,Math.floor(xp()/100)+1)}
 
-let currentUser = null;
-let currentProfile = null;
-let currentChannel = null;
-
-
-/* =========================================================
-   HELPERS
-========================================================= */
-
-function escapeHtml(value){
-
-    return String(value ?? "")
-        .replace(/[&<>"']/g,function(char){
-
-            const map = {
-                "&":"&amp;",
-                "<":"&lt;",
-                ">":"&gt;",
-                '"':"&quot;",
-                "'":"&#039;"
-            };
-
-            return map[char];
-        });
+function ensureUserData(id){
+ if(!db.portfolios[id])db.portfolios[id]={cash:10000,holdings:{}};
+ if(!db.badges[id])db.badges[id]=[];
+ if(!db.xp[id])db.xp[id]=0;
 }
 
-
-function setText(id,value){
-
-    const element =
-        document.getElementById(id);
-
-    if(element){
-        element.textContent =
-            value ?? "";
-    }
+function award(id){
+ ensureUserData(db.current);
+ const arr=db.badges[db.current];
+ if(!arr.includes(id)){
+  arr.push(id);
+  const b=badgeDefs.find(x=>x.id===id);
+  if(b)db.xp[db.current]+=b.xp;
+  db.activity.unshift({id:uid(),user:db.current,text:"Gautas ženkliukas: "+(b?.name||id),date:new Date().toLocaleString("lt-LT")});
+  save();
+ }
 }
 
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-function showPage(pageId){
-
-    document
-        .querySelectorAll(".page")
-        .forEach(function(page){
-
-            page.classList.remove("active");
-
-        });
-
-
-    const page =
-        document.getElementById(pageId);
-
-    if(page){
-        page.classList.add("active");
-    }
-
-
-    document
-        .querySelectorAll(".nav-btn")
-        .forEach(function(button){
-
-            button.classList.toggle(
-                "active",
-                button.dataset.page === pageId
-            );
-
-        });
-
-
-    if(pageId === "chat"){
-        loadChannels();
-    }
-
-    if(pageId === "badges"){
-        loadBadges();
-    }
-
-    if(pageId === "creator"){
-        loadCreator();
-    }
+function addXP(n){
+ db.xp[db.current]=(db.xp[db.current]||0)+n;
+ if(level()>=5)award("level5");
+ save();
 }
 
-
-document
-    .querySelectorAll(".nav-btn")
-    .forEach(function(button){
-
-        button.addEventListener(
-            "click",
-            function(){
-
-                showPage(
-                    button.dataset.page
-                );
-
-            }
-        );
-
-    });
-
-
-document
-    .querySelectorAll(".quick-link")
-    .forEach(function(element){
-
-        element.addEventListener(
-            "click",
-            function(){
-
-                showPage(
-                    element.dataset.page
-                );
-
-            }
-        );
-
-    });
-
-
-/* =========================================================
-   AUTH UI
-========================================================= */
-
-function createAuthUI(){
-
-    if(document.getElementById("authOverlay")){
-        return;
-    }
-
-
-    const overlay =
-        document.createElement("div");
-
-    overlay.id =
-        "authOverlay";
-
-    overlay.className =
-        "auth-overlay";
-
-
-    overlay.innerHTML = `
-
-        <div class="auth-box">
-
-            <h2>⚜️ EBK FINANCES</h2>
-
-            <div class="sub">
-                Prisijunk prie sistemos
-            </div>
-
-            <input
-                id="authEmail"
-                class="auth-input"
-                type="email"
-                placeholder="El. paštas"
-                autocomplete="email"
-            >
-
-            <input
-                id="authPassword"
-                class="auth-input"
-                type="password"
-                placeholder="Slaptažodis"
-                autocomplete="current-password"
-            >
-
-            <input
-                id="authUsername"
-                class="auth-input"
-                type="text"
-                placeholder="Vartotojo vardas registracijai"
-                style="display:none"
-            >
-
-            <div class="auth-row">
-
-                <button
-                    id="loginBtn"
-                    class="btn">
-                    Prisijungti
-                </button>
-
-                <button
-                    id="registerBtn"
-                    class="btn secondary">
-                    Registruotis
-                </button>
-
-            </div>
-
-            <div
-                id="authMsg"
-                class="auth-msg">
-            </div>
-
-        </div>
-    `;
-
-
-    document.body.appendChild(
-        overlay
-    );
-
-
-    document
-        .getElementById("loginBtn")
-        .addEventListener(
-            "click",
-            login
-        );
-
-
-    document
-        .getElementById("registerBtn")
-        .addEventListener(
-            "click",
-            registerUser
-        );
-
-
-    document
-        .getElementById("authPassword")
-        .addEventListener(
-            "keydown",
-            function(event){
-
-                if(event.key === "Enter"){
-                    login();
-                }
-
-            }
-        );
+function register(){
+ const name=document.getElementById("regName").value.trim();
+ const email=document.getElementById("regEmail").value.trim().toLowerCase();
+ const p=document.getElementById("regPassword").value;
+ const p2=document.getElementById("regPassword2").value;
+ if(name.length<2)return authError("Įveskite vardą.");
+ if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email))return authError("Neteisingas el. pašto adresas.");
+ if(p.length<6)return authError("Slaptažodis turi būti bent 6 simbolių.");
+ if(p!==p2)return authError("Slaptažodžiai nesutampa.");
+ if(db.users.some(u=>u.email===email))return authError("Tokia paskyra jau egzistuoja.");
+ const id=uid();
+ db.users.push({id,name,email,password:p,role:"user",created:new Date().toISOString()});
+ db.current=id;ensureUserData(id);award("welcome");save();startApp();
 }
 
-
-/* =========================================================
-   LOGIN
-========================================================= */
-
-async function login(){
-
-    const email =
-        document
-            .getElementById("authEmail")
-            .value
-            .trim();
-
-    const password =
-        document
-            .getElementById("authPassword")
-            .value;
-
-    const msg =
-        document.getElementById("authMsg");
-
-
-    if(!email || !password){
-
-        msg.textContent =
-            "Įrašyk el. paštą ir slaptažodį.";
-
-        return;
-    }
-
-
-    msg.textContent =
-        "Jungiamasi...";
-
-
-    const result =
-        await supabaseClient.auth
-            .signInWithPassword({
-
-                email:email,
-                password:password
-
-            });
-
-
-    if(result.error){
-
-        msg.textContent =
-            "Klaida: " +
-            result.error.message;
-
-        return;
-    }
-
-
-    msg.textContent =
-        "Prisijungta.";
-
-    await boot();
+function login(){
+ const email=document.getElementById("loginEmail").value.trim().toLowerCase();
+ const p=document.getElementById("loginPassword").value;
+ const u=db.users.find(x=>x.email===email&&x.password===p);
+ if(!u)return authError("Neteisingas el. paštas arba slaptažodis.");
+ db.current=u.id;ensureUserData(u.id);save();startApp();
 }
 
+function authError(t){document.getElementById("authMessage").innerHTML='<div class="notice err">'+esc(t)+'</div>'}
+function showRegister(){document.getElementById("loginForm").classList.add("hidden");document.getElementById("registerForm").classList.remove("hidden");document.getElementById("authMessage").innerHTML=""}
+function showLogin(){document.getElementById("registerForm").classList.add("hidden");document.getElementById("loginForm").classList.remove("hidden");document.getElementById("authMessage").innerHTML=""}
 
-/* =========================================================
-   REGISTER
-========================================================= */
-
-async function registerUser(){
-
-    const email =
-        document
-            .getElementById("authEmail")
-            .value
-            .trim();
-
-    const password =
-        document
-            .getElementById("authPassword")
-            .value;
-
-    const usernameInput =
-        document.getElementById(
-            "authUsername"
-        );
-
-    const msg =
-        document.getElementById(
-            "authMsg"
-        );
-
-
-    usernameInput.style.display =
-        "block";
-
-
-    const username =
-        usernameInput.value.trim();
-
-
-    if(!email){
-
-        msg.textContent =
-            "Įrašyk el. paštą.";
-
-        return;
-    }
-
-
-    if(!username){
-
-        msg.textContent =
-            "Įrašyk vartotojo vardą.";
-
-        return;
-    }
-
-
-    if(password.length < 6){
-
-        msg.textContent =
-            "Slaptažodis turi būti bent 6 simbolių.";
-
-        return;
-    }
-
-
-    msg.textContent =
-        "Kuriama paskyra...";
-
-
-    const result =
-        await supabaseClient.auth
-            .signUp({
-
-                email:email,
-                password:password,
-
-                options:{
-                    data:{
-                        username:username,
-                        full_name:username
-                    }
-                }
-
-            });
-
-
-    if(result.error){
-
-        msg.textContent =
-            "Klaida: " +
-            result.error.message;
-
-        return;
-    }
-
-
-    /*
-       Jei Supabase leidžia prisijungti iš karto,
-       profilį sukuriame dabar.
-    */
-
-    if(result.data.session){
-
-        await createOrUpdateProfile(
-            result.data.user,
-            username
-        );
-
-        msg.textContent =
-            "Paskyra sukurta.";
-
-        await boot();
-
-        return;
-    }
-
-
-    /*
-       Jei įjungtas email confirmation,
-       vartotojas turės patvirtinti el. paštą.
-       Username saugomas Supabase user metadata.
-    */
-
-    msg.textContent =
-        "Paskyra sukurta. Patvirtink el. paštą ir tada prisijunk.";
+function startApp(){
+ document.getElementById("auth").classList.remove("show");
+ const u=currentUser();
+ if(!u)return;
+ ensureUserData(u.id);
+ document.getElementById("adminNav").classList.toggle("hidden",u.role!=="admin");
+ document.getElementById("creatorNav").classList.toggle("hidden",!["admin","creator"].includes(u.role));
+ document.getElementById("avatar").textContent=u.name.charAt(0).toUpperCase();
+ document.getElementById("profileName").textContent=u.name;
+ document.getElementById("profileEmail").textContent=u.email;
+ document.getElementById("editName").value=u.name;
+ document.getElementById("editEmail").value=u.email;
+ renderAll();
+ go("dashboard");
 }
 
-
-/* =========================================================
-   PROFILE
-========================================================= */
-
-async function createOrUpdateProfile(
-    user,
-    fallbackUsername
-){
-
-    if(!user){
-        return null;
-    }
-
-
-    const metadata =
-        user.user_metadata || {};
-
-
-    const username =
-        metadata.username ||
-        fallbackUsername ||
-        "Vartotojas";
-
-
-    const payload = {
-
-        id:user.id,
-
-        username:username,
-
-        full_name:
-            metadata.full_name ||
-            username,
-
-        role:"user",
-
-        level:1,
-
-        points:0,
-
-        pluses:0
-
-    };
-
-
-    const result =
-        await supabaseClient
-            .from("profiles")
-            .upsert(
-                payload,
-                {
-                    onConflict:"id"
-                }
-            )
-            .select()
-            .single();
-
-
-    if(result.error){
-
-        console.error(
-            "Profile error:",
-            result.error
-        );
-
-        return null;
-    }
-
-
-    return result.data;
+function go(id){
+ document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
+ const p=document.getElementById(id);
+ if(p)p.classList.add("active");
+ document.querySelectorAll("#nav button").forEach(x=>x.classList.toggle("active",x.dataset.page===id));
+ if(id==="community")renderChat();
+ if(id==="quiz")renderQuiz();
+ if(id==="admin")renderAdmin();
+ if(id==="creator")renderCreator();
 }
 
+document.querySelectorAll("#nav button").forEach(b=>b.addEventListener("click",()=>go(b.dataset.page)));
+document.getElementById("logoutBtn").onclick=()=>{db.current=null;save();location.reload()};
 
-/* =========================================================
-   BOOT
-========================================================= */
-
-async function boot(){
-
-    const result =
-        await supabaseClient.auth
-            .getSession();
-
-
-    if(result.error){
-
-        console.error(
-            result.error
-        );
-
-        createAuthUI();
-
-        return;
-    }
-
-
-    const session =
-        result.data.session;
-
-
-    if(!session){
-
-        createAuthUI();
-
-        return;
-    }
-
-
-    currentUser =
-        session.user;
-
-
-    let profileResult =
-        await supabaseClient
-            .from("profiles")
-            .select(
-                "id,username,full_name,avatar_url,role,level,points,pluses"
-            )
-            .eq(
-                "id",
-                currentUser.id
-            )
-            .maybeSingle();
-
-
-    /*
-       Jei profilio nėra, bandome jį sukurti
-       iš Auth metadata.
-    */
-
-    if(
-        !profileResult.data &&
-        !profileResult.error
-    ){
-
-        const username =
-            currentUser
-                .user_metadata
-                ?.username ||
-            "Vartotojas";
-
-
-        await createOrUpdateProfile(
-            currentUser,
-            username
-        );
-
-
-        profileResult =
-            await supabaseClient
-                .from("profiles")
-                .select(
-                    "id,username,full_name,avatar_url,role,level,points,pluses"
-                )
-                .eq(
-                    "id",
-                    currentUser.id
-                )
-                .maybeSingle();
-    }
-
-
-    if(profileResult.error){
-
-        console.error(
-            "Profile load error:",
-            profileResult.error
-        );
-    }
-
-
-    currentProfile =
-        profileResult.data || {
-
-            id:currentUser.id,
-
-            username:
-                currentUser
-                    .user_metadata
-                    ?.username ||
-                "Vartotojas",
-
-            role:"user",
-
-            level:1,
-
-            points:0,
-
-            pluses:0
-
-        };
-
-
-    document
-        .getElementById("authOverlay")
-        ?.remove();
-
-
-    updateUI();
-
-
-    await loadBadges();
-
-
-    /*
-       Į chat automatiškai neiname.
-       Pagrindinis lieka pagrindiniu.
-    */
+function renderMarkets(){
+ const q=document.getElementById("marketSearch").value.toLowerCase();
+ const type=document.getElementById("marketType").value;
+ const list=assets.filter(a=>(type==="all"||a.type===type)&&(a.name.toLowerCase().includes(q)||a.s.toLowerCase().includes(q)));
+ document.getElementById("marketTable").innerHTML=list.map(a=>`<tr><td><b>${a.s}</b><br><span class="muted">${a.name}</span></td><td>${a.type}</td><td>${money(a.price)}</td><td class="${a.change>=0?'gold':''}">${a.change>=0?"+":""}${a.change.toFixed(2)}%</td><td><button class="primary" onclick="quickTrade('${a.s}')">Trade</button></td></tr>`).join("");
 }
 
+function quickTrade(s){go("transactions");document.getElementById("txAsset").value=s;document.getElementById("txQty").focus()}
 
-/* =========================================================
-   UI
-========================================================= */
-
-function updateUI(){
-
-    const profile =
-        currentProfile || {};
-
-
-    const username =
-        profile.username ||
-        profile.full_name ||
-        "Vartotojas";
-
-
-    const role =
-        profile.role || "user";
-
-
-    document.body.classList.toggle(
-        "creator-user",
-        role === "creator"
-    );
-
-
-    setText(
-        "homeLevel",
-        profile.level ?? 1
-    );
-
-    setText(
-        "homePoints",
-        profile.points ?? 0
-    );
-
-    setText(
-        "homePluses",
-        profile.pluses ?? 0
-    );
-
-
-    setText(
-        "profileName",
-        username
-    );
-
-
-    setText(
-        "profileEmail",
-        currentUser?.email || ""
-    );
-
-
-    setText(
-        "profileLevel",
-        profile.level ?? 1
-    );
-
-    setText(
-        "profilePoints",
-        profile.points ?? 0
-    );
-
-    setText(
-        "profilePluses",
-        profile.pluses ?? 0
-    );
-
-
-    const userArea =
-        document.getElementById(
-            "userArea"
-        );
-
-
-    if(userArea){
-
-        userArea.innerHTML = `
-
-            <button
-                id="logoutBtn"
-                class="btn secondary">
-
-                ${
-                    role === "creator"
-                    ? "⚜️ EBK · CREATOR"
-                    : "👤 " + escapeHtml(username)
-                }
-
-            </button>
-        `;
-
-
-        document
-            .getElementById("logoutBtn")
-            .addEventListener(
-                "click",
-                logout
-            );
-    }
-
-
-    const newChannelBtn =
-        document.getElementById(
-            "newChannelBtn"
-        );
-
-
-    if(newChannelBtn){
-
-        newChannelBtn.style.display =
-            role === "creator"
-            ? "block"
-            : "none";
-    }
-
-
-    loadHomeBadges();
+function renderPortfolio(){
+ const p=db.portfolios[db.current];let value=0,pnl=0;
+ const rows=Object.entries(p.holdings).filter(([s,h])=>h.qty>0).map(([s,h])=>{
+  const a=asset(s),v=h.qty*a.price,cost=h.qty*h.avg;
+  value+=v;pnl+=v-cost;
+  return `<tr><td><b>${s}</b><br><span class="muted">${a.name}</span></td><td>${h.qty.toFixed(6)}</td><td>${money(a.price)}</td><td>${money(v)}</td><td class="${v>=cost?'gold':''}">${money(v-cost)}</td></tr>`
+ }).join("");
+ document.getElementById("cashValue").textContent=money(p.cash);
+ document.getElementById("portfolioValue").textContent=money(value);
+ document.getElementById("totalValue").textContent=money(p.cash+value);
+ document.getElementById("portfolioPnL").textContent=money(pnl);
+ document.getElementById("portfolioTable").innerHTML=rows||'<tr><td colspan="5" class="empty">Portfelis tuščias.</td></tr>';
 }
 
-
-/* =========================================================
-   LOGOUT
-========================================================= */
-
-async function logout(){
-
-    await supabaseClient.auth.signOut();
-
-    currentUser = null;
-    currentProfile = null;
-    currentChannel = null;
-
-    location.reload();
+function executeTrade(){
+ const p=db.portfolios[db.current],s=document.getElementById("txAsset").value,side=document.getElementById("txSide").value;
+ const qty=Number(document.getElementById("txQty").value),a=asset(s);
+ if(!qty||qty<=0)return txMsg("Įveskite teigiamą kiekį.","err");
+ const total=qty*a.price;
+ p.holdings[s]??={qty:0,avg:0};
+ const h=p.holdings[s];
+ if(side==="buy"){
+  if(p.cash<total)return txMsg("Nepakanka grynųjų lėšų.","err");
+  h.avg=(h.qty*h.avg+total)/(h.qty+qty);h.qty+=qty;p.cash-=total;
+ }else{
+  if(h.qty<qty)return txMsg("Nepakanka šio turto.","err");
+  h.qty-=qty;p.cash+=total;
+  if(h.qty===0)h.avg=0;
+ }
+ db.transactions.unshift({id:uid(),user:db.current,date:new Date().toLocaleString("lt-LT"),side,s,qty,price:a.price,total});
+ db.activity.unshift({id:uid(),user:db.current,text:`${side==="buy"?"Nupirkta":"Parduota"} ${qty} ${s}`,date:new Date().toLocaleString("lt-LT")});
+ if(db.transactions.filter(x=>x.user===db.current).length===1)award("first_trade");
+ if(db.transactions.filter(x=>x.user===db.current).length>=10)award("trader");
+ save();document.getElementById("txQty").value="";txMsg("Sandoris sėkmingai įvykdytas.","ok");renderAll();
 }
 
+function txMsg(t,c){document.getElementById("txMessage").innerHTML=`<div class="notice ${c||""}">${esc(t)}</div>`}
+document.getElementById("txExecute").onclick=executeTrade;
 
-/* =========================================================
-   CHANNELS
-========================================================= */
-
-async function loadChannels(){
-
-    const list =
-        document.getElementById(
-            "channelList"
-        );
-
-
-    if(!list){
-        return;
-    }
-
-
-    list.innerHTML =
-        '<div class="label">Kraunama...</div>';
-
-
-    const result =
-        await supabaseClient
-            .from("channels")
-            .select(
-                "id,name,description,is_private,created_by"
-            )
-            .order(
-                "name",
-                {
-                    ascending:true
-                }
-            );
-
-
-    if(result.error){
-
-        list.innerHTML =
-            '<div class="label">' +
-            escapeHtml(
-                result.error.message
-            ) +
-            '</div>';
-
-        return;
-    }
-
-
-    const channels =
-        result.data || [];
-
-
-    if(!channels.length){
-
-        list.innerHTML =
-            '<div class="label">' +
-            'Kanalų dar nėra.' +
-            '</div>';
-
-        return;
-    }
-
-
-    list.innerHTML =
-        channels
-            .map(function(channel){
-
-                return `
-
-                    <div
-                        class="channel"
-                        data-channel-id="${escapeHtml(channel.id)}">
-
-                        <div class="channel-name">
-
-                            ${
-                                channel.is_private
-                                ? "🔒 "
-                                : "📢 "
-                            }
-
-                            ${escapeHtml(
-                                channel.name ||
-                                "Kanalas"
-                            )}
-
-                        </div>
-
-                        <div class="channel-description">
-
-                            ${escapeHtml(
-                                channel.description ||
-                                ""
-                            )}
-
-                        </div>
-
-                    </div>
-                `;
-            })
-            .join("");
-
-
-    list
-        .querySelectorAll(
-            ".channel"
-        )
-        .forEach(function(element){
-
-            element.addEventListener(
-                "click",
-                function(){
-
-                    openChannel(
-                        element.dataset.channelId
-                    );
-
-                }
-            );
-
-        });
+function renderTransactions(){
+ const list=db.transactions.filter(x=>x.user===db.current);
+ document.getElementById("txTable").innerHTML=list.map(x=>`<tr><td>${esc(x.date)}</td><td>${x.side==="buy"?"Pirkimas":"Pardavimas"}</td><td>${x.s}</td><td>${x.qty}</td><td>${money(x.price)}</td><td>${money(x.total)}</td></tr>`).join("")||'<tr><td colspan="6" class="empty">Sandorių nėra.</td></tr>';
+ document.getElementById("txAsset").innerHTML=assets.map(a=>`<option value="${a.s}">${a.s} — ${a.name}</option>`).join("");
 }
 
-
-/* =========================================================
-   OPEN CHANNEL
-========================================================= */
-
-async function openChannel(channelId){
-
-    if(!channelId){
-        return;
-    }
-
-
-    currentChannel =
-        channelId;
-
-
-    document
-        .querySelectorAll(".channel")
-        .forEach(function(element){
-
-            element.classList.toggle(
-                "active",
-                element.dataset.channelId ===
-                channelId
-            );
-
-        });
-
-
-    const channelResult =
-        await supabaseClient
-            .from("channels")
-            .select(
-                "id,name,description,is_private,created_by"
-            )
-            .eq(
-                "id",
-                channelId
-            )
-            .maybeSingle();
-
-
-    if(channelResult.error){
-
-        showChatError(
-            channelResult.error.message
-        );
-
-        return;
-    }
-
-
-    if(!channelResult.data){
-
-        showChatError(
-            "Kanalas nerastas."
-        );
-
-        return;
-    }
-
-
-    const channel =
-        channelResult.data;
-
-
-    setText(
-        "chatTitle",
-        ""
-    );
-
-
-    const title =
-        document.getElementById(
-            "chatTitle"
-        );
-
-
-    title.innerHTML = `
-
-        <h2>
-            📢 ${escapeHtml(
-                channel.name ||
-                "Kanalas"
-            )}
-        </h2>
-
-        <div class="label">
-            ${escapeHtml(
-                channel.description ||
-                ""
-            )}
-        </div>
-    `;
-
-
-    const input =
-        document.getElementById(
-            "messageInput"
-        );
-
-    const send =
-        document.getElementById(
-            "sendMessageBtn"
-        );
-
-
-    input.disabled = false;
-    send.disabled = false;
-
-
-    await loadMessages(
-        channelId
-    );
+function renderDashboard(){
+ const p=db.portfolios[db.current];let inv=0;
+ Object.entries(p.holdings).forEach(([s,h])=>inv+=h.qty*asset(s).price);
+ let pnl=0;Object.entries(p.holdings).forEach(([s,h])=>pnl+=h.qty*(asset(s).price-h.avg));
+ document.getElementById("dashBalance").textContent=money(p.cash+inv);
+ document.getElementById("dashInvest").textContent=money(inv);
+ document.getElementById("dashPnL").textContent=money(pnl);
+ document.getElementById("dashLevel").textContent=level();
+ document.getElementById("dashPortfolio").innerHTML=Object.entries(p.holdings).filter(([s,h])=>h.qty>0).map(([s,h])=>`<div class="notice"><b>${s}</b> — ${h.qty.toFixed(4)} <span class="muted">${money(h.qty*asset(s).price)}</span></div>`).join("")||'<div class="empty">Nėra investicijų.</div>';
+ document.getElementById("dashBadges").innerHTML=(db.badges[db.current]||[]).map(id=>{const b=badgeDefs.find(x=>x.id===id);return b?`<span class="badge">${b.icon} ${b.name}</span>`:""}).join("")||'<span class="muted">Ženkliukų dar nėra.</span>';
+ document.getElementById("activity").innerHTML=db.activity.filter(x=>x.user===db.current).slice(0,8).map(x=>`<div class="msg">${esc(x.text)} <span class="muted">— ${esc(x.date)}</span></div>`).join("")||'<div class="empty">Veiklos nėra.</div>';
 }
 
-
-/* =========================================================
-   MESSAGES
-========================================================= */
-
-async function loadMessages(channelId){
-
-    const box =
-        document.getElementById(
-            "messages"
-        );
-
-
-    box.innerHTML =
-        '<div class="label">Kraunamos žinutės...</div>';
-
-
-    const result =
-        await supabaseClient
-            .from("messages")
-            .select("*")
-            .eq(
-                "channel_id",
-                channelId
-            )
-            .order(
-                "created_at",
-                {
-                    ascending:true
-                }
-            )
-            .limit(100);
-
-
-    if(result.error){
-
-        box.innerHTML =
-            '<div class="label">' +
-            escapeHtml(
-                result.error.message
-            ) +
-            '</div>';
-
-        return;
-    }
-
-
-    const messages =
-        result.data || [];
-
-
-    if(!messages.length){
-
-        box.innerHTML =
-            '<div class="label">' +
-            'Šiame kanale dar nėra žinučių.' +
-            '</div>';
-
-        return;
-    }
-
-
-    box.innerHTML =
-        messages
-            .map(renderMessage)
-            .join("");
-
-
-    box.scrollTop =
-        box.scrollHeight;
+function renderBadges(){
+ document.getElementById("allBadges").innerHTML=badgeDefs.map(b=>{
+  const got=(db.badges[db.current]||[]).includes(b.id);
+  return `<div class="box" style="display:inline-block;width:280px;vertical-align:top;margin:5px;opacity:${got?1:.45}"><div style="font-size:28px;color:var(--gold)">${b.icon}</div><h3>${b.name}</h3><p class="muted">${b.desc}</p><span class="badge">${got?"✓ Gauta":"🔒 Užrakinta"}</span></div>`
+ }).join("");
 }
 
-
-function renderMessage(message){
-
-    const name =
-        message.username ||
-        message.author_name ||
-        message.author_username ||
-        "Vartotojas";
-
-
-    const content =
-        message.content ||
-        message.body ||
-        "";
-
-
-    let time = "";
-
-
-    if(message.created_at){
-
-        const date =
-            new Date(
-                message.created_at
-            );
-
-        if(!isNaN(date)){
-
-            time =
-                date.toLocaleString(
-                    "lt-LT",
-                    {
-                        day:"2-digit",
-                        month:"2-digit",
-                        hour:"2-digit",
-                        minute:"2-digit"
-                    }
-                );
-        }
-    }
-
-
-    return `
-
-        <div class="msg">
-
-            <span class="msg-user">
-                ${escapeHtml(name)}
-            </span>
-
-            ${
-                time
-                ? `<span class="msg-time">${escapeHtml(time)}</span>`
-                : ""
-            }
-
-            <br>
-
-            ${escapeHtml(content)}
-
-        </div>
-    `;
+function renderChat(){
+ const active=document.querySelector(".channel.active")?.dataset.channel||"general";
+ document.getElementById("channelTitle").textContent="# "+active;
+ const list=db.chats[active]||[];
+ document.getElementById("messages").innerHTML=list.map(m=>`<div class="msg"><b>${esc(m.name)}</b> <span class="muted">${esc(m.date)}</span><br>${esc(m.text)}</div>`).join("")||'<div class="empty">Kol kas žinučių nėra.</div>';
+}
+document.querySelectorAll(".channel").forEach(c=>c.onclick=()=>{document.querySelectorAll(".channel").forEach(x=>x.classList.remove("active"));c.classList.add("active");renderChat()});
+document.getElementById("sendChat").onclick=sendChat;
+document.getElementById("chatInput").addEventListener("keydown",e=>{if(e.key==="Enter")sendChat()});
+function sendChat(){
+ const text=document.getElementById("chatInput").value.trim();if(!text)return;
+ const ch=document.querySelector(".channel.active").dataset.channel,u=currentUser();
+ db.chats[ch].push({name:u.name,text,date:new Date().toLocaleString("lt-LT"),user:u.id});
+ db.activity.unshift({id:uid(),user:u.id,text:"Parašei bendruomenėje",date:new Date().toLocaleString("lt-LT")});
+ award("community");addXP(5);document.getElementById("chatInput").value="";save();renderChat();
 }
 
-
-/* =========================================================
-   SEND MESSAGE
-========================================================= */
-
-async function sendMessage(){
-
-    if(!currentUser){
-
-        alert(
-            "Pirmiausia prisijunk."
-        );
-
-        return;
-    }
-
-
-    if(!currentChannel){
-
-        alert(
-            "Pasirink kanalą."
-        );
-
-        return;
-    }
-
-
-    const input =
-        document.getElementById(
-            "messageInput"
-        );
-
-
-    const content =
-        input.value.trim();
-
-
-    if(!content){
-        return;
-    }
-
-
-    const username =
-        currentProfile?.username ||
-        currentProfile?.full_name ||
-        "Vartotojas";
-
-
-    /*
-       Pirmas variantas:
-       user_id + content.
-    */
-
-    let result =
-        await supabaseClient
-            .from("messages")
-            .insert({
-
-                channel_id:
-                    currentChannel,
-
-                user_id:
-                    currentUser.id,
-
-                content:
-                    content
-
-            });
-
-
-    /*
-       Jei tavo messages lentelėje vietoje
-       user_id naudojamas author_id,
-       bandome antrą variantą.
-    */
-
-    if(result.error){
-
-        result =
-            await supabaseClient
-                .from("messages")
-                .insert({
-
-                    channel_id:
-                        currentChannel,
-
-                    author_id:
-                        currentUser.id,
-
-                    content:
-                        content
-
-                });
-    }
-
-
-    if(result.error){
-
-        alert(
-            "Žinutės nepavyko išsiųsti:\n\n" +
-            result.error.message
-        );
-
-        return;
-    }
-
-
-    input.value = "";
-
-
-    await loadMessages(
-        currentChannel
-    );
+let quizIndex=0,quizScore=0;
+function renderQuiz(){
+ const qs=db.questions||defaultQuestions;
+ if(quizIndex>=qs.length){document.getElementById("quizBox").innerHTML=`<h2>Rezultatas</h2><div class="big gold">${quizScore} / ${qs.length}</div><p>Viktorina baigta.</p><button class="primary" onclick="quizIndex=0;quizScore=0;renderQuiz()">Pradėti iš naujo</button>`;return}
+ const q=qs[quizIndex];
+ document.getElementById("quizBox").innerHTML=`<div class="muted">Klausimas ${quizIndex+1} iš ${qs.length}</div><h2>${esc(q.q)}</h2>${q.a.map((x,i)=>`<button class="secondary" style="display:block;width:100%;margin:7px 0;text-align:left" onclick="answerQuiz(${i})">${String.fromCharCode(65+i)}. ${esc(x)}</button>`).join("")}`;
+}
+function answerQuiz(i){
+ const q=db.questions[quizIndex];if(i===q.c){quizScore++;addXP(10);award("quiz")}quizIndex++;renderQuiz();
 }
 
-
-/* =========================================================
-   ENTER SEND
-========================================================= */
-
-document
-    .getElementById(
-        "sendMessageBtn"
-    )
-    .addEventListener(
-        "click",
-        sendMessage
-    );
-
-
-document
-    .getElementById(
-        "messageInput"
-    )
-    .addEventListener(
-        "keydown",
-        function(event){
-
-            if(
-                event.key === "Enter" &&
-                !event.shiftKey
-            ){
-
-                event.preventDefault();
-
-                sendMessage();
-            }
-
-        }
-    );
-
-
-/* =========================================================
-   BADGES
-========================================================= */
-
-async function loadBadges(){
-
-    const list =
-        document.getElementById(
-            "badgesList"
-        );
-
-
-    if(!list){
-        return;
-    }
-
-
-    const result =
-        await supabaseClient
-            .from("badges")
-            .select("*")
-            .order("id");
-
-
-    if(result.error){
-
-        /*
-           Jei badges RLS neleidžia skaityti,
-           paliekame statinius ženkliukus.
-        */
-
-        return;
-    }
-
-
-    const badges =
-        result.data || [];
-
-
-    if(!badges.length){
-        return;
-    }
-
-
-    list.innerHTML =
-        badges
-            .map(function(badge){
-
-                return `
-
-                    <span
-                        class="badge ${
-                            badge.creator_only
-                            ? "gold"
-                            : ""
-                        }">
-
-                        ${escapeHtml(
-                            badge.icon ||
-                            "🏅"
-                        )}
-
-                        ${escapeHtml(
-                            badge.name ||
-                            "Ženkliukas"
-                        )}
-
-                    </span>
-                `;
-
-            })
-            .join("");
-
-
-    loadHomeBadges(
-        badges
-    );
+function playGuess(choice){
+ const result=Math.random()>.5?"up":"down",win=choice===result;
+ if(win){addXP(10);award("gamer")}
+ document.getElementById("guessResult").innerHTML=`<div class="notice ${win?"ok":"err"}">${win?"Teisingai! +10 XP":"Neteisingai. Buvo "+(result==="up"?"Kils":"Kris")}.</div>`;
+ document.getElementById("gameXP").textContent=xp()+" XP";
+}
+function playNumber(){
+ const n=Number(document.getElementById("gameNum").value),r=Math.floor(Math.random()*10)+1,win=n===r;
+ if(win){addXP(20);award("gamer")}
+ document.getElementById("numberResult").innerHTML=`<div class="notice ${win?"ok":"err"}">${win?"Puiku! +20 XP":"Nepataikei. Skaičius buvo "+r}.</div>`;
+ document.getElementById("gameXP").textContent=xp()+" XP";
 }
 
+document.getElementById("saveProfile").onclick=()=>{
+ const u=currentUser(),name=document.getElementById("editName").value.trim(),email=document.getElementById("editEmail").value.trim().toLowerCase();
+ if(name.length<2)return profileMsg("Neteisingas vardas.","err");
+ if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email))return profileMsg("Neteisingas el. paštas.","err");
+ if(db.users.some(x=>x.id!==u.id&&x.email===email))return profileMsg("Šis el. paštas jau naudojamas.","err");
+ u.name=name;u.email=email;save();startApp();profileMsg("Profilis išsaugotas.","ok");
+};
+function profileMsg(t,c){document.getElementById("profileMsg").innerHTML=`<div class="notice ${c}">${esc(t)}</div>`}
 
-function loadHomeBadges(badges){
-
-    const list =
-        document.getElementById(
-            "homeBadges"
-        );
-
-
-    if(!list){
-        return;
-    }
-
-
-    if(!badges){
-
-        list.innerHTML = `
-
-            <span class="badge">
-                🌱 Naujokas
-            </span>
-
-            <span class="badge gold">
-                ➕ PLUS I
-            </span>
-
-            <span class="badge">
-                💎 Diamond
-            </span>
-        `;
-
-        return;
-    }
-
-
-    list.innerHTML =
-        badges
-            .slice(0,6)
-            .map(function(badge){
-
-                return `
-
-                    <span
-                        class="badge ${
-                            badge.creator_only
-                            ? "gold"
-                            : ""
-                        }">
-
-                        ${escapeHtml(
-                            badge.icon ||
-                            "🏅"
-                        )}
-
-                        ${escapeHtml(
-                            badge.name ||
-                            "Ženkliukas"
-                        )}
-
-                    </span>
-                `;
-
-            })
-            .join("");
+function renderAdmin(){
+ if(currentUser()?.role!=="admin")return go("dashboard");
+ document.getElementById("adminUsers").textContent=db.users.length;
+ document.getElementById("adminTx").textContent=db.transactions.length;
+ document.getElementById("adminMsgs").textContent=Object.values(db.chats).reduce((a,x)=>a+x.length,0);
+ document.getElementById("adminBadges").textContent=Object.values(db.badges).reduce((a,x)=>a+x.length,0);
+ document.getElementById("adminUsersTable").innerHTML=db.users.map(u=>`<tr><td>${esc(u.name)}</td><td>${esc(u.email)}</td><td>${u.role}</td><td>${db.xp[u.id]||0}</td><td>${u.id===db.current?"":"<button class='danger' onclick=\"deleteUser('"+u.id+"')\">Trinti</button>"}</td></tr>`).join("");
 }
 
+function deleteUser(id){if(!confirm("Ištrinti vartotoją?"))return;db.users=db.users.filter(u=>u.id!==id);delete db.xp[id];delete db.portfolios[id];delete db.badges[id];db.transactions=db.transactions.filter(x=>x.user!==id);save();renderAdmin()}
+function resetDemo(){if(!confirm("Atstatyti demo duomenis?"))return;const u=currentUser();db.portfolios[u.id]={cash:10000,holdings:{}};db.transactions=db.transactions.filter(x=>x.user!==u.id);db.activity=db.activity.filter(x=>x.user!==u.id);db.badges[u.id]=["welcome"];db.xp[u.id]=10;save();renderAll()}
+function clearAllData(){if(!confirm("Tai ištrins visus vietinius EBK duomenis. Tęsti?"))return;localStorage.removeItem(KEY);location.reload()}
 
-/* =========================================================
-   CREATOR
-========================================================= */
-
-function loadCreator(){
-
-    const locked =
-        document.getElementById(
-            "creatorLocked"
-        );
-
-    const content =
-        document.getElementById(
-            "creatorContent"
-        );
-
-
-    const isCreator =
-        currentProfile?.role ===
-        "creator";
-
-
-    locked.style.display =
-        isCreator
-        ? "none"
-        : "block";
-
-
-    content.style.display =
-        isCreator
-        ? "block"
-        : "none";
+function createQuestion(){
+ if(!["admin","creator"].includes(currentUser()?.role))return;
+ const q=document.getElementById("newQuestion").value.trim();
+ const a=[1,2,3,4].map(i=>document.getElementById("answer"+i).value.trim());
+ const c=Number(document.getElementById("correctAnswer").value);
+ if(!q||a.some(x=>!x))return document.getElementById("creatorMsg").innerHTML='<div class="notice err">Užpildykite visus laukus.</div>';
+ db.questions.push({q,a,c});save();
+ document.getElementById("creatorMsg").innerHTML='<div class="notice ok">Klausimas pridėtas.</div>';
+ ["newQuestion","answer1","answer2","answer3","answer4"].forEach(id=>document.getElementById(id).value="");
+ renderCreator();
+}
+function renderCreator(){
+ document.getElementById("questionList").innerHTML=db.questions.map((q,i)=>`<div class="notice"><b>${i+1}. ${esc(q.q)}</b><br><span class="muted">Teisingas: ${esc(q.a[q.c])}</span></div>`).join("");
 }
 
-
-/* =========================================================
-   NEW CHANNEL
-========================================================= */
-
-const newChannelBtn =
-    document.getElementById(
-        "newChannelBtn"
-    );
-
-
-const channelModal =
-    document.getElementById(
-        "channelModal"
-    );
-
-
-newChannelBtn.addEventListener(
-    "click",
-    function(){
-
-        if(
-            currentProfile?.role !==
-            "creator"
-        ){
-
-            return;
-        }
-
-        channelModal.classList.add(
-            "show"
-        );
-
-    }
-);
-
-
-document
-    .getElementById(
-        "cancelChannelBtn"
-    )
-    .addEventListener(
-        "click",
-        function(){
-
-            channelModal.classList.remove(
-                "show"
-            );
-
-        }
-    );
-
-
-document
-    .getElementById(
-        "createChannelBtn"
-    )
-    .addEventListener(
-        "click",
-        createChannel
-    );
-
-
-async function createChannel(){
-
-    if(
-        currentProfile?.role !==
-        "creator"
-    ){
-
-        return;
-    }
-
-
-    const name =
-        document
-            .getElementById(
-                "channelName"
-            )
-            .value
-            .trim();
-
-
-    const description =
-        document
-            .getElementById(
-                "channelDescription"
-            )
-            .value
-            .trim();
-
-
-    const msg =
-        document.getElementById(
-            "channelMsg"
-        );
-
-
-    if(!name){
-
-        msg.textContent =
-            "Įrašyk kanalo pavadinimą.";
-
-        return;
-    }
-
-
-    msg.textContent =
-        "Kuriamas kanalas...";
-
-
-    const result =
-        await supabaseClient
-            .from("channels")
-            .insert({
-
-                name:name,
-
-                description:
-                    description,
-
-                is_private:false,
-
-                created_by:
-                    currentUser.id
-
-            })
-            .select()
-            .single();
-
-
-    if(result.error){
-
-        msg.textContent =
-            "Klaida: " +
-            result.error.message;
-
-        return;
-    }
-
-
-    msg.textContent =
-        "Kanalas sukurtas.";
-
-
-    document
-        .getElementById(
-            "channelName"
-        )
-        .value = "";
-
-
-    document
-        .getElementById(
-            "channelDescription"
-        )
-        .value = "";
-
-
-    setTimeout(
-        function(){
-
-            channelModal.classList.remove(
-                "show"
-            );
-
-            msg.textContent = "";
-
-            loadChannels();
-
-        },
-        500
-    );
+function renderAll(){
+ renderDashboard();renderMarkets();renderPortfolio();renderTransactions();renderBadges();
+ document.getElementById("gameXP").textContent=xp()+" XP";
+ if(currentUser()?.role==="admin")renderAdmin();
+ if(["admin","creator"].includes(currentUser()?.role))renderCreator();
 }
 
+document.getElementById("marketSearch").addEventListener("input",renderMarkets);
+document.getElementById("marketType").addEventListener("change",renderMarkets);
 
-/* =========================================================
-   CHAT ERROR
-========================================================= */
-
-function showChatError(message){
-
-    const title =
-        document.getElementById(
-            "chatTitle"
-        );
-
-    title.innerHTML = `
-
-        <h2>⚠️ Klaida</h2>
-
-        <div class="label">
-            ${escapeHtml(message)}
-        </div>
-    `;
-
-
-    document
-        .getElementById(
-            "messageInput"
-        )
-        .disabled = true;
-
-
-    document
-        .getElementById(
-            "sendMessageBtn"
-        )
-        .disabled = true;
-}
-
-
-/* =========================================================
-   AUTH STATE
-========================================================= */
-
-supabaseClient
-    .auth
-    .onAuthStateChange(
-        function(event,session){
-
-            if(session){
-
-                /*
-                   Supabase Auth callback metu
-                   nedarome sunkių užklausų.
-                   Boot pasirūpins duomenimis.
-                */
-
-                return;
-
-            }
-
-
-            currentUser = null;
-            currentProfile = null;
-
-            createAuthUI();
-
-        }
-    );
-
-
-/* =========================================================
-   START
-========================================================= */
-
-boot();
-
+(function init(){
+ if(!db.current||!currentUser()){
+  document.getElementById("auth").classList.add("show");
+  showLogin();
+ }else startApp();
+})();
 </script>
-
 </body>
 </html>
